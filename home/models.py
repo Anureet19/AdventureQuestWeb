@@ -5,7 +5,6 @@ from django.contrib.auth.models import User
 # Create your models here.
 class Tier(models.Model):
     name = models.CharField(max_length=30, default="Gold")
-    price = models.IntegerField()
 
     def __str__(self):
         return self.name
@@ -18,14 +17,14 @@ class Package(models.Model):
     )
 
     PACKAGE_TYPE = (
-        ("1", "Season"),
-        ("2", "Monthly"),
-        ("3", "Daily"),
+        ("S", "Season"),
+        ("M", "Monthly"),
+        ("D", "Daily"),
     )
-
-    package_type = models.CharField(max_length=50, choices=PACKAGE_TYPE)
-    price_factor = models.IntegerField()
     tier = models.ForeignKey(Tier, on_delete=models.CASCADE)
+    package_type = models.CharField(max_length=50, choices=PACKAGE_TYPE)
+    price = models.IntegerField()
+    capacity = models.IntegerField()
     status = models.CharField(choices=PACKAGE_STATUS, max_length=15)
 
     def __str__(self):
