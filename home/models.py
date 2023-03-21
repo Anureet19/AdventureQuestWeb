@@ -1,3 +1,4 @@
+from django.core.validators import MaxValueValidator, MinValueValidator
 from django.db import models
 from django.contrib.auth.models import User
 
@@ -28,7 +29,7 @@ class Package(models.Model):
     status = models.CharField(choices=PACKAGE_STATUS, max_length=15)
 
     def __str__(self):
-        return self.package_type
+        return f'{self.package_type} {self.tier}'
 
 
 class Reservation(models.Model):
@@ -36,7 +37,12 @@ class Reservation(models.Model):
     expiry_date = models.DateField()
     package = models.ForeignKey(Package, on_delete=models.CASCADE)
     guest = models.ForeignKey(User, on_delete=models.CASCADE)
-    booking_id = models.CharField(max_length=100, default="null")
+    number_of_people = models.PositiveIntegerField(
+        default=1,
+        validators=[
+            MaxValueValidator(10),
+            MinValueValidator(1)
+        ])
 
     def __str__(self):
         return self.guest.username
