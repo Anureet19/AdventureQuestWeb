@@ -56,3 +56,7 @@ def registration(request):
 
     context = {'form': form}
     return render(request, 'pages/sign-up.html', context)
+
+
+def about(request):
+    return render(request, 'pages/about.html')
