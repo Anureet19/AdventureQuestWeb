@@ -1,4 +1,4 @@
-{% extends 'layouts/base_background.html' %}
+{% extends 'pages/base_background.html' %}
 {% load static %}
 
 {% block title %} AdventureQuest {% endblock title %}
@@ -148,10 +148,13 @@
                     <label for="">Tier</label>
                     <select class="form-control" name="tier_id" id="tier_id">
                         <!--Tier id and Tier-->
-
-                        {% for each_tier, tier_id in all_tier %}
-                            <option value={{tier_id}}>{{each_tier}}</option>
-                        {% endfor %}
+                        <option value={{default}} name="capacity">default</option>
+                        <option value={{gold_pass}} >Gold Pass</option>
+                        <option value={{blue_pass}} >Blue Pass</option>
+                        <option value={{silver_pass}} >Silver Pass</option>
+{#                        {% for each_tier, tier_id in all_tier %}#}
+{#                            <option value={{tier_id}}>{{each_tier}}</option>#}
+{#                        {% endfor %}#}
                     </select>
                 </div>
                 <div class="col-sm input-group input-group-static mb-4">
