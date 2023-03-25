@@ -36,7 +36,9 @@
         <ul class="nav navbar-nav" >
 
           <li>
+
               <a href="/login"><button type="button" class="form-control mr-sm-1 btn btn-primary my-3">Login</button></a>
+
           </li>
         </ul>
       </div>
@@ -173,24 +175,20 @@
   </div>
 </section>
 
-<section >
-{#    <a class="text-center shadow-blur font-weight-bold text-black" >Get Your Pass Now!</a>#}
-    <h2 class="text-center shadow-blur ">Get Your Pass Now!</h2>
-    <div class="container-fluid py-5 px-5 " id = "booknow">
-
-        <form action="/" method="POST">
+<section>
+    <h2 class="text-center">Get Your Pass Now!</h2>
+    <div class="container-fluid py-5 px-5 ">
+        <form action="" method="POST">
             {% csrf_token %}
              <div class="row justify-space-between py-2">
                 <div class="col-sm input-group input-group-static mb-4">
                     <label for="">Tier</label>
                     <select class="form-control" name="tier_id" id="tier_id">
                         <!--Tier id and Tier-->
-                        <option value={{gold_pass}} >Gold Pass</option>
-                        <option value={{blue_pass}} >Blue Pass</option>
-                        <option value={{silver_pass}} >Silver Pass</option>
-{#                        {% for each_tier, tier_id in all_tier %}#}
-{#                            <option value={{tier_id}}>{{each_tier}}</option>#}
-{#                        {% endfor %}#}
+
+                        {% for each_tier, tier_id in all_tier %}
+                            <option value={{tier_id}}>{{each_tier}}</option>
+                        {% endfor %}
                     </select>
                 </div>
                 <div class="col-sm input-group input-group-static mb-4">
@@ -263,10 +261,12 @@
       </tbody>
     </table>
   </div>
-  </div>
+</div>
 {% endif %}
 
+
 <!-- -------   START PRE-FOOTER 2 -------- -->
+
 <div class="py-5">
   <div class="container">
     <div class="row">
