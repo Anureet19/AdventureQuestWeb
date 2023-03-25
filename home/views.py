@@ -10,7 +10,7 @@ from django.contrib.auth import views as auth_views
 
 
 # Create your views here.
-
+@login_required(login_url='/login/')
 def index(request):
     all_tier = Tier.objects.values_list('name', 'id').distinct().order_by()
     if request.method == 'POST':
@@ -24,7 +24,7 @@ def index(request):
     return HttpResponse(response)
 
 
-@login_required
+@login_required(login_url='/login/')
 def bookpackage(request):
     package_id = request.GET['package_id']
     package = Package.objects.all().filter(id=package_id)
@@ -48,7 +48,7 @@ def registration(request):
         if form.is_valid():
             form.save()
             print('Account created successfully!')
-            return redirect('/login/')
+            return redirect('/login')
         else:
             print("Registration failed!")
     else:
