@@ -1,4 +1,4 @@
-{% extends 'layouts/base_background.html' %}
+{% extends 'pages/base_background.html' %}
 
 {% block title %} WinPark Login{% endblock title %}
 {% block body %} class="sign-in-basic" {% endblock body %}
@@ -39,7 +39,7 @@
                   <input class="form-check-input" type="checkbox" id="rememberMe" checked>
                   <label class="form-check-label mb-0 ms-3" for="rememberMe">Remember me</label>
                 </div>
-                <a href="{% url 'password_reset' %}" class="mt-4 text-sm">
+                <a href="/password-reset" class="mt-4 text-sm">
                   Forgot Password?
                 </a>
                 <div class="text-center">
@@ -59,5 +59,6 @@
 
   {% block footer %}
 
-  
+  {% include 'pages/footer_signin.html' %}
+
   {% endblock footer %}

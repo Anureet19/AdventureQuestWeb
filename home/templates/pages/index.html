@@ -1,4 +1,4 @@
-{% extends 'layouts/base_background.html' %}
+{% extends 'pages/base_background.html' %}
 {% load static %}
 
 {% block title %} WinPark {% endblock title %}
@@ -52,7 +52,10 @@
             </a>
           </li>
           <li>
-              <a href="/accounts/login"><button type="button" class="btn btn-white mx-4">Login</button></a>
+              <h6 class="nav-link text-white">Welcome, User</h6>
+          </li>
+          <li>
+              <a href="/logout"><button type="button" class="btn btn-white mx-4">Logout</button></a>
           </li>
         </ul>
       </div>
@@ -63,11 +66,20 @@
     <div class="container">
       <div class="row">
         <div class="col-lg-6 col-md-7 d-flex justify-content-center flex-column">
-          <h1 class="text-white mb-4">WinPark Adventures</h1>
-          <p class="text-white opacity-8 lead pe-5 me-5">At our amusement park, you'll find an incredible selection of exciting rides that are sure to get your heart racing and your adrenaline pumping! From thrilling roller coasters that twist and turn through the air at breakneck speeds, to towering drop towers that send you plummeting towards the ground, we have something for every thrill-seeker.</p>
-          <div class="buttons">
-            <button type="button" class="btn btn-white mt-4">Book Now</button>
-            <button type="button" class="btn text-white shadow-none mt-4">Learn More</button>
+          <h1 class="text-white mb-4">Adventure Quest</h1>
+          <p class="text-white opacity-8 lead  ">
+              Looking for the ultimate day of fun and adventure? Look no further than our amusement park! With thrilling rides, exciting attractions, and delicious food options, there's something for everyone at our park.But don't wait - book your tickets today to secure your spot at our amusement park.
+               Book your tickets now and get ready to experience the time of your life at our amusement park.</p>
+           <p class="text-white opacity-9 lead ">
+                We can't wait to see you there!
+           </p>
+            <div class="buttons">
+            <button type="button" class="btn btn-white mt-4">
+                <a href="#booknow"> Book Now
+                    </a>
+            </button>
+{#            <button type="button" class="btn text-white shadow-none mt-4">Learn More</button>#}
+
           </div>
         </div>
       </div>
@@ -266,16 +278,17 @@
       </tbody>
     </table>
   </div>
-  </div>
+</div>
 {% endif %}
-
 <!-- -------   START PRE-FOOTER 2 - simple social line w/ title & 3 buttons    -------- -->
 <div class="py-5">
   <div class="container">
     <div class="row">
       <div class="col-lg-5 ms-auto">
-        <h4 class="mb-1">Thank you for your support!</h4>
-        <p class="lead mb-0">We deliver the best adventures.</p>
+          {#    <a class="text-center shadow-blur font-weight-bold text-black" >Get Your Pass Now!</a>#}
+        <h4 class="mb-">Thank you for your support!</h4>
+        <p class="lead mb-1">Our adventures are top-notch.</p>
+
       </div>
       <div class="col-lg-5 me-lg-auto my-lg-auto text-lg-end mt-5">
         <a href="https://twitter.com/intent/tweet?text=Check%20Material%20UI%20Kit%20made%20by%20%40CreativeTim%20%23webdesign%20%23designsystem%20%23bootstrap5&url=https%3A%2F%2Fwww.creative-tim.com%2Fproduct%2Fmaterial-kit" class="btn btn-twitter mb-0 me-2" target="_blank">
