@@ -1,6 +1,7 @@
 from django.contrib.auth.decorators import login_required
 from django.shortcuts import render, redirect
 from django.http import HttpResponse
+from .forms import BookingForm
 from .models import Tier, Reservation, Package
 from theme_material_kit.forms import LoginForm, RegistrationForm, UserPasswordResetForm, UserSetPasswordForm, \
     UserPasswordChangeForm
@@ -75,3 +76,11 @@ class UserPasswordResetConfirmView(auth_views.PasswordResetConfirmView):
 class UserPasswordChangeView(auth_views.PasswordChangeView):
     template_name = 'pages/password_change.html'
     form_class = UserPasswordChangeForm
+
+
+# Create your views here.
+def booking_view(request):
+    form = BookingForm()
+    context = {'form': form}
+    template_name = 'bookpackage.html'
+    return render(request, template_name, context)
