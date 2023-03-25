@@ -24,7 +24,10 @@
                 We can't wait to see you there!
            </p>
             <div class="buttons">
-            <button type="button" class="btn btn-white mt-4">Book Now</button>
+            <button type="button" class="btn btn-white mt-4">
+                <a href="#booknow"> Book Now
+                    </a>
+            </button>
 {#            <button type="button" class="btn text-white shadow-none mt-4">Learn More</button>#}
           </div>
         </div>
@@ -138,10 +141,10 @@
   </div>
 </section>
 
-<section>
+<section >
 {#    <a class="text-center shadow-blur font-weight-bold text-black" >Get Your Pass Now!</a>#}
     <h2 class="text-center shadow-blur ">Get Your Pass Now!</h2>
-    <div class="container-fluid py-5 px-5 ">
+    <div class="container-fluid py-5 px-5 " id = "booknow">
         <form action="" method="POST">
             {% csrf_token %}
              <div class="row justify-space-between py-2">

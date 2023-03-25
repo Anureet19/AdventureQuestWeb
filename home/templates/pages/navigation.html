@@ -45,7 +45,7 @@
                                 </a>
 
                                 {% if app.models %}
-                                  <div class="collapse" id="collapse-{{app.app_label}}">                                                                                                   
+                                  <div class="collapse" id="collapse-{{app.app_label}}">
                                     <ul class="flex-column nav">
                                       {% for model in app.models %}
                                         {% if model.url %}
@@ -137,7 +137,7 @@
                     </h6>
 
                     {% if request.user.is_authenticated %}
-                    
+
                       {% if request.user.is_superuser %}
                         <a href="{% url 'admin:password_change' %}" class="dropdown-item border-radius-md">
                           <span>Change Password</span>
