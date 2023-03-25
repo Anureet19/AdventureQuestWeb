@@ -60,3 +60,18 @@ def registration(request):
 
 def about(request):
     return render(request, 'pages/about.html')
+
+
+class UserPasswordResetView(auth_views.PasswordResetView):
+    template_name = 'pages/password_reset.html'
+    form_class = UserPasswordResetForm
+
+
+class UserPasswordResetConfirmView(auth_views.PasswordResetConfirmView):
+    template_name = 'pages/password_reset_confirm.html'
+    form_class = UserSetPasswordForm
+
+
+class UserPasswordChangeView(auth_views.PasswordChangeView):
+    template_name = 'pages/password_change.html'
+    form_class = UserPasswordChangeForm

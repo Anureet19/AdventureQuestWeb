@@ -52,7 +52,7 @@
             </a>
           </li>
           <li>
-              <a href="/accounts/login"><button type="button" class="btn btn-white mx-4">Login</button></a>
+              <a href="/login"><button type="button" class="btn btn-white mx-4">Login</button></a>
           </li>
         </ul>
       </div>
@@ -194,14 +194,13 @@
     <h2 class="text-center shadow-blur ">Get Your Pass Now!</h2>
     <div class="container-fluid py-5 px-5 " id = "booknow">
 
-        <form action="" method="POST">
+        <form action="/" method="POST">
             {% csrf_token %}
              <div class="row justify-space-between py-2">
                 <div class="col-sm input-group input-group-static mb-4">
                     <label for="">Tier</label>
                     <select class="form-control" name="tier_id" id="tier_id">
                         <!--Tier id and Tier-->
-                        <option value={{default}} name="capacity">default</option>
                         <option value={{gold_pass}} >Gold Pass</option>
                         <option value={{blue_pass}} >Blue Pass</option>
                         <option value={{silver_pass}} >Silver Pass</option>
