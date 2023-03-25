@@ -1,15 +1,30 @@
-from django.shortcuts import render
+from django.contrib.auth.decorators import login_required
+from django.shortcuts import render, redirect
 from django.http import HttpResponse
+from .models import Tier, Reservation, Package, Ride
+from theme_material_kit.forms import LoginForm, RegistrationForm, UserPasswordResetForm, UserSetPasswordForm, \
+    UserPasswordChangeForm
+from django.contrib.auth import logout
+
+from django.contrib.auth import views as auth_views
+
 
 # Create your views here.
-
+@login_required(login_url='/login/')
 def index(request):
-    # Page from the theme 
-    return render(request, 'pages/index.html')
+    all_tier = Tier.objects.values_list('name', 'id').distinct().order_by()
+    if request.method == 'POST':
+        packages = Package.objects.all().filter(tier__id=int(request.POST['tier_id']))
+        print(packages)
+        data = {'packages': packages, 'all_tier': all_tier, 'flag': True}
+        response = render(request, 'pages/index.html', data)
+    else:
+        response = render(request, 'pages/index.html', {'all_tier': all_tier})
+
     return HttpResponse(response)
 
 
-@login_required
+@login_required(login_url='/login/')
 def bookpackage(request):
     package_id = request.GET['package_id']
     package = Package.objects.all().filter(id=package_id)
@@ -33,7 +48,7 @@ def registration(request):
         if form.is_valid():
             form.save()
             print('Account created successfully!')
-            return redirect('/login/')
+            return redirect('/login')
         else:
             print("Registration failed!")
     else:
@@ -44,5 +59,25 @@ def registration(request):
 
 
 def about(request):
-    return render(request, 'pages/about.html')
+    rides = Ride.objects.all()
+    return render(request, 'pages/about.html', {'rides': rides})
+
+
+class UserPasswordResetView(auth_views.PasswordResetView):
+    template_name = 'pages/password_reset.html'
+    form_class = UserPasswordResetForm
+
+
+class UserPasswordResetConfirmView(auth_views.PasswordResetConfirmView):
+    template_name = 'pages/password_reset_confirm.html'
+    form_class = UserSetPasswordForm
+
+
+class UserPasswordChangeView(auth_views.PasswordChangeView):
+    template_name = 'pages/password_change.html'
+    form_class = UserPasswordChangeForm
+
+
+# Create your views here.
+
 
