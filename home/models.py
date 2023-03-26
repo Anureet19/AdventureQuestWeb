@@ -61,7 +61,7 @@ class GroupBook(models.Model):
         (2, 'Gold Pass'),
     )
     members = models.IntegerField(null=False, default=1)
-    total_cost = models.DecimalField(max_digits=10, decimal_places=2)
+    total_cost = models.DecimalField(max_digits=10, decimal_places=2, default=0)
     pass_type = models.IntegerField(null=False, max_length=1, choices=GROUP_PASS_CHOICES, default=0)
     sub_pass_type = models.IntegerField(null=False, max_length=1, choices=SUB_PASS_CHOICES, default=0)
     number_of_pass = models.IntegerField(null=False, default=1)

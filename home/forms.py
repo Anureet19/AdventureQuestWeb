@@ -70,5 +70,5 @@ class GroupPassForm(forms.ModelForm):
         widgets = {
             'pass_type': forms.RadioSelect(),
             'number_of_pass': forms.NumberInput(attrs={'disabled': 'disabled'}),
-            'total_cost': forms.DecimalField(attrs={'disabled': 'disabled'}),
+            'total_cost': forms.DecimalField(widget=forms.TextInput(attrs={'disabled': 'disabled'})),
         }
