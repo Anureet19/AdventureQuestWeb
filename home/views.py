@@ -1,7 +1,7 @@
 from django.contrib.auth.decorators import login_required
 from django.shortcuts import render, redirect
 from django.http import HttpResponse
-from .forms import BookingForm
+from .forms import BookingForm, GroupPassForm
 from .models import Tier, Reservation, Package
 from theme_material_kit.forms import LoginForm, RegistrationForm, UserPasswordResetForm, UserSetPasswordForm, \
     UserPasswordChangeForm
@@ -86,5 +86,18 @@ def booking_view(request):
     return render(request, template_name, context)
 
 
-def offers_and_events(request):
-    return render(request, 'pages/deals.html')
+def offers(request):
+    offers_form = GroupPassForm()
+    if request.method == 'POST':
+        form = GroupPassForm(request.POST)
+        if form.is_valid():
+            print(1)
+            group_pass = form.save(commit=False)
+
+            return HttpResponse("Response Saved!")
+
+        else:
+            return HttpResponse("ERRORS" + str(form.errors))
+            # print(form.errors)
+    else:
+        return render(request, 'pages/deals.html', {'form': offers_form})

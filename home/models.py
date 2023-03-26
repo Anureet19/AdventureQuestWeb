@@ -67,24 +67,5 @@ class GroupBook(models.Model):
     number_of_pass = models.IntegerField(null=False, default=1)
     date = models.DateField(default=timezone.now)
 
-    def total_package_cost(self):
-        if self.sub_pass_type == 0:
-            cost = 10
-        elif self.sub_pass_type == 1:
-            cost = 15
-        else:
-            cost = 20
-
-        if self.GROUP_PASS_CHOICES == 0 or self.GROUP_PASS_CHOICES == 1:
-            return self.members * cost
-        else:
-            return cost * 2
-
-    def total_number_of_passes(self):
-        if self.GROUP_PASS_CHOICES == 0 or self.GROUP_PASS_CHOICES == 1:
-            if self.members > 10:
-                return self.members/10
-        else:
-            return self.members/2
 
 
