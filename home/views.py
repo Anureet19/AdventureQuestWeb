@@ -1,12 +1,16 @@
 from django.contrib.auth.decorators import login_required
 from django.shortcuts import render, redirect
 from django.http import HttpResponse
-from .models import Tier, Reservation, Package
+from .models import Tier, Reservation, Package, Contact
 from theme_material_kit.forms import LoginForm, RegistrationForm, UserPasswordResetForm, UserSetPasswordForm, \
     UserPasswordChangeForm
 from django.contrib.auth import logout
-
+from django.views import View
 from django.contrib.auth import views as auth_views
+from django.shortcuts import render
+from django.views.generic import FormView
+from django.urls import reverse_lazy
+from .forms import ContactForm
 
 
 # Create your views here.
@@ -75,3 +79,30 @@ class UserPasswordResetConfirmView(auth_views.PasswordResetConfirmView):
 class UserPasswordChangeView(auth_views.PasswordChangeView):
     template_name = 'pages/password_change.html'
     form_class = UserPasswordChangeForm
+
+class ContactView(FormView):
+    template_name = 'pages/contact_us.html'
+    form_class = ContactForm
+    success_url = reverse_lazy('success')
+
+    def post(self, request, *args, **kwargs):
+        form = self.get_form()
+        if form.is_valid():
+            form.save()
+            return self.form_valid(form)
+        else:
+            return self.form_invalid(form)
+
+
+def success(request):
+    return render(request, 'pages/success.html')
+
+# class ContactView(FormView):
+#     template_name = 'pages/contact_us.html'
+#     form_class = ContactForm
+#
+#     def form_valid(self, form):
+#         form.save()
+#         return render(self.request, 'pages/success.html')
+
+

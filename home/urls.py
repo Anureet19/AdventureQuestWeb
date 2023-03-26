@@ -1,6 +1,7 @@
 from django.urls import path
 from django.contrib.auth import views as auth_views
 from . import views
+from .views import ContactView, success
 
 urlpatterns = [
     path('', views.index, name='index'),
@@ -22,5 +23,7 @@ urlpatterns = [
     path('password-reset-complete/', auth_views.PasswordResetCompleteView.as_view(
         template_name='pages/password_reset_complete.html'
     ), name='password_reset_complete'),
+    path('contact-us/', ContactView.as_view(), name='contact_us'),
+    path('success/', success, name='success'),
 
 ]
