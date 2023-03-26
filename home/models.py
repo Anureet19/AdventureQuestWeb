@@ -33,10 +33,10 @@ class Package(models.Model):
 
 
 class Reservation(models.Model):
+    first_name = models.TextField(max_length=100)
+    last_name = models.TextField(max_length=100)
     entry_date = models.DateField(auto_now=False)
-    expiry_date = models.DateField()
     package = models.ForeignKey(Package, on_delete=models.CASCADE)
-    guest = models.ForeignKey(User, on_delete=models.CASCADE)
     number_of_people = models.PositiveIntegerField(
         default=1,
         validators=[

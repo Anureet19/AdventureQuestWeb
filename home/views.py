@@ -2,7 +2,7 @@ from django.contrib.auth.decorators import login_required
 from django.shortcuts import render, redirect
 from django.http import HttpResponse
 
-from .forms import BookingForm
+from .forms import BookingForm, ReservationForm
 from .models import Tier, Reservation, Package, Contact
 from theme_material_kit.forms import LoginForm, RegistrationForm, UserPasswordResetForm, UserSetPasswordForm, \
     UserPasswordChangeForm
@@ -35,7 +35,7 @@ def index(request):
 @login_required(login_url='/login/')
 def bookpackage(request):
     package_id = request.GET['package_id']
-    package = Package.objects.all().filter(id=package_id)
+    package = Package.objects.all().get(id=package_id)
     return HttpResponse(render(request, 'pages/bookpackage.html', {'package': package}))
 
 
@@ -130,8 +130,8 @@ url = f"https://maps.googleapis.com/maps/api/js?key={api_key}"
 
 
 # Create your views here.
-def booking_view(request):
-    form = BookingForm()
+def reservation_view(request):
+    form = ReservationForm()
     context = {'form': form}
     template_name = 'bookpackage.html'
     return render(request, template_name, context)
