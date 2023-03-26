@@ -1,0 +1,28 @@
+{% extends 'pages/base_background.html' %}
+
+{% block content %}
+<div id="map"></div>
+
+<script src="https://maps.googleapis.com/maps/api/js?key={{ settings.GOOGLE_MAPS_API_KEY }}"></script>
+<script>
+function initMap() {
+  var myLatLng = {lat: 43.847213, lng: -79.539393};
+  var map = new google.maps.Map(document.getElementById('map'), {
+    zoom: 14,
+    center: myLatLng
+  });
+  var marker = new google.maps.Marker({
+    position: myLatLng,
+    map: map,
+    title: 'Canada\'s Wonderland'
+  });
+}
+</script>
+
+<style>
+#map {
+  height: 400px;
+  width: 100%;
+}
+</style>
+{% endblock %}

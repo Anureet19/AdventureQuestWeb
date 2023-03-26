@@ -11,6 +11,8 @@ from django.views.generic import FormView
 from django.urls import reverse_lazy
 from .forms import ContactForm
 from django.core.mail import send_mail
+from django.views.generic import TemplateView
+from django.conf import settings
 
 
 # Create your views here.
@@ -112,7 +114,15 @@ class ContactView(FormView):
 def success(request):
     return render(request, 'pages/success.html')
 
+class LocationView(TemplateView):
+    template_name = 'pages/location.html'
 
+    def get_context_data(self, **kwargs):
+        context = super().get_context_data(**kwargs)
+        context['GOOGLE_MAPS_API_KEY'] = settings.GOOGLE_MAPS_API_KEY
+        return context
 
+api_key = settings.GOOGLE_MAPS_API_KEY
+url = f"https://maps.googleapis.com/maps/api/js?key={api_key}"
 
 

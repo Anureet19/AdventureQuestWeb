@@ -182,3 +182,6 @@ EMAIL = {
         'HOST_PASSWORD': EMAIL_HOST_PASSWORD,
     }
 }
+
+#API Keys for Maps
+GOOGLE_MAPS_API_KEY = ''

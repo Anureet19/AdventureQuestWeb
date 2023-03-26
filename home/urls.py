@@ -1,7 +1,7 @@
 from django.urls import path
 from django.contrib.auth import views as auth_views
 from . import views
-from .views import ContactView, success
+from .views import ContactView, success, LocationView
 
 urlpatterns = [
     path('', views.index, name='index'),
@@ -25,5 +25,6 @@ urlpatterns = [
     ), name='password_reset_complete'),
     path('contact-us/', ContactView.as_view(), name='contact_us'),
     path('success/', success, name='success'),
+    path('location/', LocationView.as_view(), name='location'),
 
 ]
