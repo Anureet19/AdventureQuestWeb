@@ -1,28 +1,91 @@
 {% extends 'pages/base_background.html' %}
 
 {% block content %}
-<div id="map"></div>
+<section class="directions-section">
+    <div class="container">
+        <h1 class="directions-title">Directions</h1>
+        <div class="row">
+            <div class="col-lg-7 col-md-12 map-section">
+                <div id="map"></div>
+                <div id="directions"></div>
+                <div id="address">
+                  <h3>Address:</h3>
+                  <p>University of Windsor</p>
+                  <p>401 Sunset Ave</p>
+                  <p>Windsor, ON N9B 3P4</p>
+                </div>
+                <button class="btn btn-primary get-directions-button" onclick="getDirections()">Get Directions</button>
+            </div>
+            <div class="col-lg-5 col-md-12">
+                <div class="direction-info">
+                    {% for direction in directions %}
+                    <h3 class="direction-info-title">{{ direction.title }}</h3>
+                    <p>{{ direction.description }}</p>
+                    <hr>
+                    {% endfor %}
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
 
-<script src="https://maps.googleapis.com/maps/api/js?key={{ settings.GOOGLE_MAPS_API_KEY }}"></script>
 <script>
-function initMap() {
-  var myLatLng = {lat: 43.847213, lng: -79.539393};
-  var map = new google.maps.Map(document.getElementById('map'), {
-    zoom: 14,
-    center: myLatLng
-  });
-  var marker = new google.maps.Marker({
-    position: myLatLng,
-    map: map,
-    title: 'Canada\'s Wonderland'
-  });
-}
+    function initMap() {
+        if (navigator.geolocation) {
+            navigator.geolocation.getCurrentPosition(function(position) {
+                var myLatLng = {
+                    lat: position.coords.latitude,
+                    lng: position.coords.longitude
+                };
+                var map = new google.maps.Map(document.getElementById('map'), {
+                    zoom: 14,
+                    center: myLatLng
+                });
+                var marker = new google.maps.Marker({
+                    position: myLatLng,
+                    map: map,
+                    title: 'Your current location'
+                });
+            }, function() {
+                handleLocationError(true, infoWindow, map.getCenter());
+            });
+        } else {
+            // Browser doesn't support Geolocation
+            handleLocationError(false, infoWindow, map.getCenter());
+        }
+    }
+
+    function handleLocationError(browserHasGeolocation, infoWindow, pos) {
+        infoWindow.setPosition(pos);
+        infoWindow.setContent(browserHasGeolocation ?
+            'Error: The Geolocation service failed.' :
+            'Error: Your browser doesn\'t support geolocation.');
+        infoWindow.open(map);
+    }
+
+    function getDirections() {
+        if (navigator.geolocation) {
+            navigator.geolocation.getCurrentPosition(function(position) {
+                var lat = position.coords.latitude;
+                var lng = position.coords.longitude;
+                window.open("https://www.google.com/maps/dir/?api=1&origin=" + lat + "," + lng + "&destination=University+of+Windsor");
+            }, function() {
+                handleLocationError(true, infoWindow, map.getCenter());
+            });
+        } else {
+            // Browser doesn't support Geolocation
+            handleLocationError(false, infoWindow, map.getCenter());
+        }
+    }
 </script>
 
+<script src="https://maps.googleapis.com/maps/api/js?key={{ settings.GOOGLE_MAPS_API_KEY }}&callback=initMap"></script>
+
 <style>
-#map {
-  height: 400px;
-  width: 100%;
-}
+    #map {
+        height: 400px;
+        width: 100%;
+    }
 </style>
+
 {% endblock %}

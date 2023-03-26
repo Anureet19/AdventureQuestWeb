@@ -54,3 +54,10 @@ class Contact(models.Model):
 
     def __str__(self):
         return self.full_name
+
+class Directions(models.Model):
+    title = models.CharField(max_length=100)
+    description = models.TextField()
+
+    def __str__(self):
+        return self.title

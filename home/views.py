@@ -3,7 +3,7 @@ from django.shortcuts import render, redirect
 from django.http import HttpResponse
 
 from .forms import BookingForm
-from .models import Tier, Reservation, Package, Contact
+from .models import Tier, Reservation, Package, Contact, Directions
 from theme_material_kit.forms import LoginForm, RegistrationForm, UserPasswordResetForm, UserSetPasswordForm, \
     UserPasswordChangeForm
 from django.contrib.auth import logout
@@ -135,4 +135,19 @@ def booking_view(request):
     context = {'form': form}
     template_name = 'bookpackage.html'
     return render(request, template_name, context)
+
+class LocationView(TemplateView):
+    template_name = 'pages/location.html'
+
+    def get_context_data(self, **kwargs):
+        directions = Directions.objects.all()
+
+        context = super().get_context_data(**kwargs)
+        context['GOOGLE_MAPS_API_KEY'] = settings.GOOGLE_MAPS_API_KEY
+        context['directions'] = directions
+        return context
+
+api_key = settings.GOOGLE_MAPS_API_KEY
+url = f"https://maps.googleapis.com/maps/api/js?key={api_key}"
+
 
