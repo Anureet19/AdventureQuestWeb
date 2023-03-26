@@ -1,7 +1,7 @@
 from django.urls import path
 from django.contrib.auth import views as auth_views
-from . import views
-from .views import ContactView, success, LocationView
+from home import views
+from home.views import ContactView, success, LocationView
 
 urlpatterns = [
     path('', views.index, name='index'),
