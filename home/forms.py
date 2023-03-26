@@ -4,7 +4,7 @@ from django.contrib.auth.forms import UserCreationForm, AuthenticationForm, Pass
 from django.contrib.auth.models import User
 from django.utils.translation import gettext_lazy as _
 from django.forms import ModelForm
-from .models import Reservation
+from .models import Reservation, GroupBook
 
 
 class BookingForm(ModelForm):
@@ -61,3 +61,14 @@ class UserPasswordChangeForm(PasswordChangeForm):
     new_password2 = forms.CharField(max_length=50, widget=forms.PasswordInput(attrs={
         'class': 'form-control'
     }), label="Confirm New Password")
+
+
+class GroupPassForm(forms.ModelForm):
+    class Meta:
+        model = GroupBook
+        fields = ['members', 'pass_type', 'sub_pass_type', 'number_of_pass', 'total_cost', 'date']
+        widgets = {
+            'pass_type': forms.RadioSelect(),
+            'number_of_pass': forms.NumberInput(attrs={'disabled': 'disabled'}),
+            'total_cost': forms.DecimalField(attrs={'disabled': 'disabled'}),
+        }
