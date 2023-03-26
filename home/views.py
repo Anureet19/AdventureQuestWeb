@@ -5,12 +5,12 @@ from .models import Tier, Reservation, Package, Contact
 from theme_material_kit.forms import LoginForm, RegistrationForm, UserPasswordResetForm, UserSetPasswordForm, \
     UserPasswordChangeForm
 from django.contrib.auth import logout
-from django.views import View
 from django.contrib.auth import views as auth_views
 from django.shortcuts import render
 from django.views.generic import FormView
 from django.urls import reverse_lazy
 from .forms import ContactForm
+from django.core.mail import send_mail
 
 
 # Create your views here.
@@ -89,6 +89,21 @@ class ContactView(FormView):
         form = self.get_form()
         if form.is_valid():
             form.save()
+
+            # get the form data
+            full_name = form.cleaned_data.get('full_name')
+            email = form.cleaned_data.get('email')
+            message = form.cleaned_data.get('message')
+
+            # send email
+            subject = 'New contact form submission'
+            body = f'Full Name: {full_name}\nEmail: {email}\nMessage: {message}'
+            sender_email = email
+            recipient_list = ['adventure.quest.web@gmail.com']
+            print("sending")
+            send_mail(subject, body, sender_email, recipient_list)
+            print("sent")
+
             return self.form_valid(form)
         else:
             return self.form_invalid(form)
@@ -97,12 +112,7 @@ class ContactView(FormView):
 def success(request):
     return render(request, 'pages/success.html')
 
-# class ContactView(FormView):
-#     template_name = 'pages/contact_us.html'
-#     form_class = ContactForm
-#
-#     def form_valid(self, form):
-#         form.save()
-#         return render(self.request, 'pages/success.html')
+
+
 
 
