@@ -84,3 +84,7 @@ def booking_view(request):
     context = {'form': form}
     template_name = 'bookpackage.html'
     return render(request, template_name, context)
+
+
+def offers_and_events(request):
+    return render(request, 'pages/deals.html')

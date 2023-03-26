@@ -1,6 +1,7 @@
 from django.core.validators import MaxValueValidator, MinValueValidator
 from django.db import models
 from django.contrib.auth.models import User
+from django.utils import timezone
 
 
 # Create your models here.
@@ -46,3 +47,20 @@ class Reservation(models.Model):
 
     def __str__(self):
         return self.guest.username
+
+
+class GroupBook(models.Model):
+    GROUP_PASS_CHOICES = [
+        (0, 'Family'),
+        (1, 'Student'),
+        (2, 'Couple'),
+    ]
+    members = models.IntegerField(null=False, default=1, max_length=10),
+    total_cost = models.DecimalField(max_digits=10, decimal_places=2),
+    pass_type = models.IntegerField(null=False, max_length=1, choices=GROUP_PASS_CHOICES, default=0)
+    number_of_pass = models.IntegerField(null=False, default=1)
+    date = models.DateField(default=timezone.now)
+
+    def total_package_cost(self):
+        return self.members * 10
+
