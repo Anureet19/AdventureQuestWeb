@@ -1,13 +1,20 @@
 from django.contrib.auth.decorators import login_required
 from django.shortcuts import render, redirect
 from django.http import HttpResponse
+
 from .forms import BookingForm
-from .models import Tier, Reservation, Package
+from .models import Tier, Reservation, Package, Contact
 from theme_material_kit.forms import LoginForm, RegistrationForm, UserPasswordResetForm, UserSetPasswordForm, \
     UserPasswordChangeForm
 from django.contrib.auth import logout
-
 from django.contrib.auth import views as auth_views
+from django.shortcuts import render
+from django.views.generic import FormView
+from django.urls import reverse_lazy
+from .forms import ContactForm
+from django.core.mail import send_mail
+from django.views.generic import TemplateView
+from django.conf import settings
 
 
 # Create your views here.
@@ -78,9 +85,54 @@ class UserPasswordChangeView(auth_views.PasswordChangeView):
     form_class = UserPasswordChangeForm
 
 
+class ContactView(FormView):
+    template_name = 'pages/contact_us.html'
+    form_class = ContactForm
+    success_url = reverse_lazy('success')
+
+    def post(self, request, *args, **kwargs):
+        form = self.get_form()
+        if form.is_valid():
+            form.save()
+
+            # get the form data
+            full_name = form.cleaned_data.get('full_name')
+            email = form.cleaned_data.get('email')
+            message = form.cleaned_data.get('message')
+
+            # send email
+            subject = 'New contact form submission'
+            body = f'Full Name: {full_name}\nEmail: {email}\nMessage: {message}'
+            sender_email = email
+            recipient_list = ['adventure.quest.web@gmail.com']
+            print("sending")
+            send_mail(subject, body, sender_email, recipient_list)
+            print("sent")
+
+            return self.form_valid(form)
+        else:
+            return self.form_invalid(form)
+
+
+def success(request):
+    return render(request, 'pages/success.html')
+
+class LocationView(TemplateView):
+    template_name = 'pages/location.html'
+
+    def get_context_data(self, **kwargs):
+        context = super().get_context_data(**kwargs)
+        context['GOOGLE_MAPS_API_KEY'] = settings.GOOGLE_MAPS_API_KEY
+        return context
+
+api_key = settings.GOOGLE_MAPS_API_KEY
+url = f"https://maps.googleapis.com/maps/api/js?key={api_key}"
+
+
 # Create your views here.
 def booking_view(request):
     form = BookingForm()
     context = {'form': form}
     template_name = 'bookpackage.html'
     return render(request, template_name, context)
+

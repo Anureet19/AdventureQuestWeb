@@ -25,25 +25,26 @@
                   or contact using our contact form.
                 </p>
                 <form id="contact-form" method="post" autocomplete="off">
+                    {% csrf_token %}
                   <div class="card-body p-0 my-3">
                     <div class="row">
                       <div class="col-md-6">
                         <div class="input-group input-group-static mb-4">
                           <label>Full Name</label>
-                          <input type="email" class="form-control" placeholder="Full Name">
+                          {{ form.full_name }}
                         </div>
                       </div>
                       <div class="col-md-6 ps-md-2">
                         <div class="input-group input-group-static mb-4">
                           <label>Email</label>
-                          <input type="email" class="form-control" placeholder="hello@creative-tim.com">
+                          {{ form.email }}
                         </div>
                       </div>
                     </div>
                     <div class="form-group mb-0 mt-md-0 mt-4">
                       <div class="input-group input-group-static mb-4">
                         <label>How can we help you?</label>
-                        <textarea name="message" class="form-control" id="message" rows="6" placeholder="Describe your problem in at least 250 characters"></textarea>
+                        {{ form.message }}
                       </div>
                     </div>
                     <div class="row">
@@ -58,6 +59,5 @@
           </div>
         </div>
       </div>
-    </div>
   </section>
-  {% endblock content %}
+{% endblock content %}
