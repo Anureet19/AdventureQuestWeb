@@ -3,7 +3,15 @@ from django.contrib.auth.forms import UserCreationForm, AuthenticationForm, Pass
     PasswordResetForm, SetPasswordForm
 from django.contrib.auth.models import User
 from django.utils.translation import gettext_lazy as _
-from .models import Contact
+
+from django.forms import ModelForm
+from .models import Reservation, Contact
+
+
+class BookingForm(ModelForm):
+    class Meta:
+        model = Reservation
+        fields = '__all__'
 
 
 class RegistrationForm(UserCreationForm):

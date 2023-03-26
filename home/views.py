@@ -1,6 +1,8 @@
 from django.contrib.auth.decorators import login_required
 from django.shortcuts import render, redirect
 from django.http import HttpResponse
+
+from .forms import BookingForm
 from .models import Tier, Reservation, Package, Contact
 from theme_material_kit.forms import LoginForm, RegistrationForm, UserPasswordResetForm, UserSetPasswordForm, \
     UserPasswordChangeForm
@@ -16,7 +18,7 @@ from django.conf import settings
 
 
 # Create your views here.
-
+@login_required(login_url='/login/')
 def index(request):
     all_tier = Tier.objects.values_list('name', 'id').distinct().order_by()
     if request.method == 'POST':
@@ -30,7 +32,7 @@ def index(request):
     return HttpResponse(response)
 
 
-@login_required
+@login_required(login_url='/login/')
 def bookpackage(request):
     package_id = request.GET['package_id']
     package = Package.objects.all().filter(id=package_id)
@@ -54,7 +56,7 @@ def registration(request):
         if form.is_valid():
             form.save()
             print('Account created successfully!')
-            return redirect('/login/')
+            return redirect('/login')
         else:
             print("Registration failed!")
     else:
@@ -81,6 +83,7 @@ class UserPasswordResetConfirmView(auth_views.PasswordResetConfirmView):
 class UserPasswordChangeView(auth_views.PasswordChangeView):
     template_name = 'pages/password_change.html'
     form_class = UserPasswordChangeForm
+
 
 class ContactView(FormView):
     template_name = 'pages/contact_us.html'
@@ -125,4 +128,11 @@ class LocationView(TemplateView):
 api_key = settings.GOOGLE_MAPS_API_KEY
 url = f"https://maps.googleapis.com/maps/api/js?key={api_key}"
 
+
+# Create your views here.
+def booking_view(request):
+    form = BookingForm()
+    context = {'form': form}
+    template_name = 'bookpackage.html'
+    return render(request, template_name, context)
 

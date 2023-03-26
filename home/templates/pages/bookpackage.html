@@ -1,8 +1,7 @@
-{% extends 'layouts/base_background.html' %}
+{% extends 'pages/base_background.html' %}
 {% load static %}
 
 {% block title %} WinPark {% endblock title %}
-
 
 {% block body %} class="index-page bg-gray-200" {% endblock body %}
 
@@ -41,7 +40,7 @@
               <div class="col-md-6">
                 <div class="input-group input-group-dynamic">
                     <label>Tier</label>
-                    <input type="text" class="form-control" disabled value={{package.tier.name}}>
+                    <input type="text" class="form-control" id="tier" name="tier" disabled value={{package.tier.name}}>
                 </div>
               </div>
               <div class="col-md-6 ps-2">
