@@ -19,16 +19,8 @@
       <div class="container">
         <div class="row justify-content-center">
           <div class="col-lg-8 text-center mx-auto my-auto">
-            <h1 class="text-white">Work with an amazing design</h1>
-            <p class="lead mb-4 text-white opacity-8">We’re constantly trying to express ourselves and actualize our dreams. If you have the opportunity to play this game</p>
-            <button type="submit" class="btn bg-white text-dark">Create Account</button>
-            <h6 class="text-white mb-2 mt-5">Find us on</h6>
-            <div class="d-flex justify-content-center">
-              <a href="javascript:;"><i class="fab fa-facebook text-lg text-white me-4"></i></a>
-              <a href="javascript:;"><i class="fab fa-instagram text-lg text-white me-4"></i></a>
-              <a href="javascript:;"><i class="fab fa-twitter text-lg text-white me-4"></i></a>
-              <a href="javascript:;"><i class="fab fa-google-plus text-lg text-white"></i></a>
-            </div>
+            <h1 class="text-white">Adventure Quest</h1>
+            <p class="lead mb-4 text-white opacity-8">At Adventure Quest, we offer a wide range of activities and attractions that cater to children of all ages. From thrilling rides and interactive games to educational exhibits and live shows, there's something for everyone here. We also have plenty of options for food and drink, so you can refuel and recharge between adventures. We know that parents want peace of mind when it comes to the safety of their children, which is why we take great care to ensure that our park is secure and well-maintained. </p>
           </div>
         </div>
       </div>
@@ -40,7 +32,9 @@
 
 <section class="my-5 py-5">
   <div class="container">
+
     <div class="row align-items-center">
+    <h3 class="text-dark ">Our Rides</h3>
         {% for ride in rides %}
           <div class="col-lg-4 ms-auto me-auto p-lg-4 mt-lg-0 mt-4">
            <div class="rotating-card-container">
@@ -117,15 +111,14 @@
                 <div class="col-lg-4 col-md-6 col-12 mt-n5">
                   <a href="javascript:;">
                     <div class="p-3 pe-md-0">
-                      <img class="w-100 border-radius-md shadow-lg" src="{% static 'img/team-5.jpg' %}" alt="image">
+                      <img class="w-100 border-radius-md shadow-lg" src="{% static 'img/team-5.jpeg' %}" alt="image">
                     </div>
                   </a>
                 </div>
                 <div class="col-lg-8 col-md-6 col-12 my-auto">
                   <div class="card-body ps-lg-0">
                     <h5 class="mb-0">Emma Roberts</h5>
-                    <h6 class="text-info">UI Designer</h6>
-                    <p class="mb-0">Artist is a term applied to a person who engages in an activity deemed to be an art.</p>
+                    <h6 class="text-info">CEO</h6>
                   </div>
                 </div>
               </div>
@@ -137,63 +130,21 @@
                 <div class="col-lg-4 col-md-6 col-12 mt-n5">
                   <a href="javascript:;">
                     <div class="p-3 pe-md-0">
-                      <img class="w-100 border-radius-md shadow-lg" src="{% static 'img/bruce-mars.jpg' %}" alt="image">
+                      <img class="w-100 border-radius-md shadow-lg" src="{% static 'img/team-4.png' %}" alt="image">
                     </div>
                   </a>
                 </div>
                 <div class="col-lg-8 col-md-6 col-12 my-auto">
                   <div class="card-body ps-lg-0">
                     <h5 class="mb-0">William Pearce</h5>
-                    <h6 class="text-info">Boss</h6>
-                    <p class="mb-0">Artist is a term applied to a person who engages in an activity deemed to be an art.</p>
+                    <h6 class="text-info">CTO</h6>
                   </div>
                 </div>
               </div>
             </div>
           </div>
         </div>
-        <div class="row mt-4">
-          <div class="col-lg-6 col-12">
-            <div class="card card-profile mt-4 z-index-2">
-              <div class="row">
-                <div class="col-lg-4 col-md-6 col-12 mt-n5">
-                  <a href="javascript:;">
-                    <div class="p-3 pe-md-0">
-                      <img class="w-100 border-radius-md shadow-lg" src="{% static 'img/ivana-squares.jpg' %}" alt="image">
-                    </div>
-                  </a>
-                </div>
-                <div class="col-lg-8 col-md-6 col-12 my-auto">
-                  <div class="card-body ps-lg-0">
-                    <h5 class="mb-0">Ivana Flow</h5>
-                    <h6 class="text-info">Athlete</h6>
-                    <p class="mb-0">Artist is a term applied to a person who engages in an activity deemed to be an art.</p>
-                  </div>
-                </div>
-              </div>
-            </div>
-          </div>
-          <div class="col-lg-6 col-12">
-            <div class="card card-profile mt-lg-4 mt-5 z-index-2">
-              <div class="row">
-                <div class="col-lg-4 col-md-6 col-12 mt-n5">
-                  <a href="javascript:;">
-                    <div class="p-3 pe-md-0">
-                      <img class="w-100 border-radius-md shadow-lg" src="{% static 'img/ivana-square.jpg' %}" alt="image">
-                    </div>
-                  </a>
-                </div>
-                <div class="col-lg-8 col-md-6 col-12 my-auto">
-                  <div class="card-body ps-lg-0">
-                    <h5 class="mb-0">Marquez Garcia</h5>
-                    <h6 class="text-info">JS Developer</h6>
-                    <p class="mb-0">Artist is a term applied to a person who engages in an activity deemed to be an art.</p>
-                  </div>
-                </div>
-              </div>
-            </div>
-          </div>
-        </div>
+
       </div>
     </section>
     <!-- -------- END Features w/ pattern background & stats & rocket -------- -->
@@ -220,37 +171,6 @@
         </div>
       </div>
     </section>
-    <!-- -------- START PRE-FOOTER 1 w/ SUBSCRIBE BUTTON AND IMAGE ------- -->
-    <section class="my-5 pt-5">
-      <div class="container">
-        <div class="row">
-          <div class="col-md-6 m-auto">
-            <h4>Be the first to see the news</h4>
-            <p class="mb-4">
-              Your company may not be in the software business,
-              but eventually, a software company will be in your business.
-            </p>
-            <div class="row">
-              <div class="col-8">
-                <div class="input-group input-group-outline">
-                  <label class="form-label">Email Here...</label>
-                  <input type="text" class="form-control mb-sm-0">
-                </div>
-              </div>
-              <div class="col-4 ps-0">
-                <button type="button" class="btn bg-gradient-info mb-0 h-100 position-relative z-index-2">Subscribe</button>
-              </div>
-            </div>
-          </div>
-          <div class="col-md-5 ms-auto">
-            <div class="position-relative">
-              <img class="max-width-50 w-100 position-relative z-index-2" src="{% static 'img/macbook.png' %}" alt="image">
-            </div>
-          </div>
-        </div>
-      </div>
-    </section>
-    <!-- -------- END PRE-FOOTER 1 w/ SUBSCRIBE BUTTON AND IMAGE ------- -->
   </div>
 
 
