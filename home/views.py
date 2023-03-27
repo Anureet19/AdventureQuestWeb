@@ -1,9 +1,12 @@
 from django.contrib.auth.decorators import login_required
+from django.contrib.auth.models import User
 from django.shortcuts import render, redirect
 from django.http import HttpResponse
+import datetime
 
-from .forms import BookingForm, ReservationForm
-from .models import Tier, Reservation, Package, Contact
+
+from .forms import BookingForm
+from .models import Tier, Reservation, Package, Contact, Directions
 from theme_material_kit.forms import LoginForm, RegistrationForm, UserPasswordResetForm, UserSetPasswordForm, \
     UserPasswordChangeForm
 from django.contrib.auth import logout
@@ -130,9 +133,46 @@ url = f"https://maps.googleapis.com/maps/api/js?key={api_key}"
 
 
 # Create your views here.
-def reservation_view(request):
-    form = ReservationForm()
-    context = {'form': form}
-    template_name = 'bookpackage.html'
-    return render(request, template_name, context)
+def bookingview(request):
+    if request.method == 'POST':
+        print(request.POST)
+        full_name = request.POST.get('full_name', False)
+        total_person = int(request.POST.get('number_of_people', False))
+        entry = request.POST.get('entry', False)
+        package_id = request.POST.get('package_id', False)
+        current_user = request.user
+        user_object = User.objects.all().get(username=current_user)
+        package_object = Package.objects.all().get(id=package_id)
+        price_per_ticket = package_object.price
+        total_price = total_person * price_per_ticket
+        booking_id = str(package_id) + str(datetime.datetime.now())
+        reservation = Reservation()
+
+        reservation.full_name = full_name
+        reservation.number_of_people = total_person
+        reservation.entry_date = entry
+        reservation.package = package_object
+        reservation.user = user_object
+        reservation.price_paid = total_price
+        reservation.booking_id = booking_id
+
+        reservation.save()
+        return HttpResponse(render(request, 'pages/bookingconfirm.html', {'price': total_price, 'booking_id': booking_id}))
+    else:
+        return HttpResponse('Access Denied')
+
+class LocationView(TemplateView):
+    template_name = 'pages/location.html'
+
+    def get_context_data(self, **kwargs):
+        directions = Directions.objects.all()
+
+        context = super().get_context_data(**kwargs)
+        context['GOOGLE_MAPS_API_KEY'] = settings.GOOGLE_MAPS_API_KEY
+        context['directions'] = directions
+        return context
+
+api_key = settings.GOOGLE_MAPS_API_KEY
+url = f"https://maps.googleapis.com/maps/api/js?key={api_key}"
+
 

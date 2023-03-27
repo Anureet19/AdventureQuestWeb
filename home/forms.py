@@ -11,7 +11,7 @@ from .models import Reservation, Contact
 class BookingForm(ModelForm):
     class Meta:
         model = Reservation
-        fields = '__all__'
+        fields = ['full_name', 'entry_date', 'package', 'number_of_people']
 
 
 class RegistrationForm(UserCreationForm):
@@ -82,17 +82,4 @@ class ContactForm(forms.ModelForm):
             'full_name': forms.TextInput(attrs={'class': 'form-control', 'placeholder': 'Full Name'}),
             'email': forms.EmailInput(attrs={'class': 'form-control', 'placeholder': 'Email'}),
             'message': forms.Textarea(attrs={'class': 'form-control', 'placeholder': 'How can we help you?'}),
-        }
-
-
-class ReservationForm(forms.ModelForm):
-    class Meta:
-        model = Reservation
-        fields = ['tier', 'package_type', 'price', 'capacity', 'status']
-        widgets = {
-            'tier': forms.TextInput(attrs={'class': 'form-control input-group input-group-dynamic mb-4', 'placeholder': 'Tier Name'}),
-            'package_type': forms.EmailInput(attrs={'class input-group input-group-dynamic mb-4': 'form-control', 'placeholder': 'package_type'}),
-            'price': forms.Textarea(attrs={'class': 'form-control input-group input-group-dynamic mb-4', 'placeholder': 'How can we help you?'}),
-            'capacity': forms.Textarea(attrs={'class': 'form-control input-group input-group-dynamic mb-4', 'placeholder': 'How can we help you?'}),
-            'status': forms.Textarea(attrs={'class': 'form-control input-group input-group-dynamic mb-4', 'placeholder': 'How can we help you?'}),
         }

@@ -26,5 +26,6 @@ urlpatterns = [
     path('contact-us/', ContactView.as_view(), name='contact_us'),
     path('success/', success, name='success'),
     path('location/', LocationView.as_view(), name='location'),
+    path('confirmbooking/', views.bookingview, name="confirmbooking")
 
 ]
