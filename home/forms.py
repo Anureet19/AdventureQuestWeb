@@ -73,6 +73,7 @@ class GroupPassForm(forms.ModelForm):
             'sub_pass_type': forms.Select(attrs={'onChange': "total_package_cost()"}),
             'number_of_pass': forms.NumberInput(attrs={'disabled': 'disabled'}),
             'total_cost': forms.TextInput(attrs={'disabled': 'disabled'}),
+        }
 
 
 class ContactForm(forms.ModelForm):

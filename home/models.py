@@ -68,7 +68,7 @@ class GroupBook(models.Model):
     sub_pass_type = models.IntegerField(null=False, max_length=1, choices=SUB_PASS_CHOICES, default=0)
     number_of_pass = models.IntegerField(null=False, default=1)
     date = models.DateField(default=timezone.now)
-        
+
 
 class Contact(models.Model):
     full_name = models.CharField(max_length=100)
@@ -78,13 +78,15 @@ class Contact(models.Model):
     def __str__(self):
         return self.full_name
 
+
 class Directions(models.Model):
     title = models.CharField(max_length=100)
     description = models.TextField()
 
     def __str__(self):
         return self.title
-    
+
+
 class Ride(models.Model):
     name = models.CharField(max_length=200)
     height_limit = models.PositiveIntegerField()
@@ -94,4 +96,3 @@ class Ride(models.Model):
 
     def __str__(self):
         return self.name
-
