@@ -31,5 +31,4 @@ $ python manage.py runserver
 - [ ] Information page (Park timings & other relevant information)
 - [ ] A page for upcoming offers and discounts
 - [ ] Live location feature to show/direct to the park's location
-- [ ] Price filtering (Variable pricing for adults & children)
 - [ ] Allowing booking for multiple tiers passes which could include daily, monthly or yearly passes for full or partial access to different rides and adventure activities.
