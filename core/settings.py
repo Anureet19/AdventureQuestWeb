@@ -184,4 +184,4 @@ EMAIL = {
 }
 
 #API Keys for Maps
-GOOGLE_MAPS_API_KEY = 'AIzaSyCPYQEoLkfGvwhmEg5gekIh-2ILQTAkJzo'
+GOOGLE_MAPS_API_KEY = ''

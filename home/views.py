@@ -159,7 +159,7 @@ def offers(request):
             print(1)
             group_pass = form.save(commit=False)
             group_pass.save()
-            return HttpResponse("Booking Confirmed!")
+            return render(request, 'pages/bookingsuccess.html')
 
         else:
             return HttpResponse("ERRORS" + str(form.errors))
