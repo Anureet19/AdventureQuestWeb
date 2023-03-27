@@ -3,7 +3,7 @@ from django.contrib.auth.models import User
 from django.shortcuts import render, redirect
 from django.http import HttpResponse
 import datetime
-
+from django.views import View
 
 from .forms import BookingForm
 from .models import Tier, Reservation, Package, Contact, Directions
@@ -48,13 +48,40 @@ class UserLoginView(auth_views.LoginView):
     success_url = '/'
 
 
-def user_logout_view(request):
-    logout(request)
-    return redirect('/login/')
+# def user_logout_view(request):
+#     logout(request)
+#     return redirect('/login/')
+
+class UserLogoutView(View):
+    def get(self, request, *args, **kwargs):
+        logout(request)
+        return redirect('/login/')
 
 
-def registration(request):
-    if request.method == 'POST':
+# def registration(request):
+#     if request.method == 'POST':
+#         form = RegistrationForm(request.POST)
+#         if form.is_valid():
+#             form.save()
+#             print('Account created successfully!')
+#             return redirect('/login')
+#         else:
+#             print("Registration failed!")
+#     else:
+#         form = RegistrationForm()
+#
+#     context = {'form': form}
+#     return render(request, 'pages/sign-up.html', context)
+
+class RegistrationView(View):
+    template_name = 'pages/sign-up.html'
+
+    def get(self, request, *args, **kwargs):
+        form = RegistrationForm()
+        context = {'form': form}
+        return render(request, self.template_name, context)
+
+    def post(self, request, *args, **kwargs):
         form = RegistrationForm(request.POST)
         if form.is_valid():
             form.save()
@@ -62,12 +89,8 @@ def registration(request):
             return redirect('/login')
         else:
             print("Registration failed!")
-    else:
-        form = RegistrationForm()
-
-    context = {'form': form}
-    return render(request, 'pages/sign-up.html', context)
-
+        context = {'form': form}
+        return render(request, self.template_name, context)
 
 def about(request):
     return render(request, 'pages/about.html')
