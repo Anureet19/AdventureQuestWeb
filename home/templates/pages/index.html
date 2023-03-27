@@ -257,11 +257,17 @@
               </td>
 
               <td class="align-middle">
-                  <a href="/bookpackage?package_id={{ package.id }}">
-                      <button class="btn btn-success mb-0">
-                        Book Now
+                  {% if package.status == "1" %}
+                      <a href="/bookpackage?package_id={{ package.id }}">
+                          <button class="btn btn-success mb-0">
+                            Book Now
+                          </button>
+                      </a>
+                  {% else %}
+                      <button class="btn btn-danger mb-0 disabled" disabled>
+                        Unavailable
                       </button>
-                  </a>
+                  {% endif %}
               </td>
             </tr>
         {% endfor %}

@@ -26,7 +26,7 @@ def index(request):
     all_tier = Tier.objects.values_list('name', 'id').distinct().order_by()
     if request.method == 'POST':
         packages = Package.objects.all().filter(tier__id=int(request.POST['tier_id']))
-        print(packages)
+        print(packages[0].status)
         data = {'packages': packages, 'all_tier': all_tier, 'flag': True}
         response = render(request, 'pages/index.html', data)
     else:
