@@ -23,21 +23,28 @@
           </li>
           <li class="nav-item">
             <a class="nav-link text-white" href="/about">
-              Park Information
+              Ride Information
             </a>
           </li>
           <li class="nav-item">
-            <a class="nav-link text-white" href="javascript:;">
+            <a class="nav-link text-white" href="/contact-us">
               Contact Us
+            </a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link text-white" href="/location">
+              Location
             </a>
           </li>
         </ul>
 
         <ul class="nav navbar-nav" >
-
+            <li>
+              <h6 class="nav-link text-white my-3">Welcome, User</h6>
+           </li>
           <li>
 
-              <a href="/login"><button type="button" class="form-control mr-sm-1 btn btn-primary my-3">Login</button></a>
+              <a href="/logout"><button type="button" class="form-control mr-sm-1 btn btn-primary my-3">Logout</button></a>
 
           </li>
         </ul>
@@ -193,7 +200,7 @@
                 </div>
                 <div class="col-sm input-group input-group-static mb-4">
                     <label for="">Select Date</label>
-                    <input class="form-control mr-sm-2" type="date" placeholder="Check in" name="cin" aria-label="Search" required="True">
+                    <input class="form-control mr-sm-2" type="date" min="2023-03-27" max="2025-04-30" placeholder="Check in" name="cin" aria-label="Search" required="True">
                 </div>
                 <div class="col-sm input-group input-group-static mb-4">
                     <label for="">People</label>
@@ -250,11 +257,17 @@
               </td>
 
               <td class="align-middle">
-                  <a href="/bookpackage?package_id={{ package.id }}">
-                      <button class="btn btn-success mb-0">
-                        Book Now
+                  {% if package.status == "1" %}
+                      <a href="/bookpackage?package_id={{ package.id }}">
+                          <button class="btn btn-success mb-0">
+                            Book Now
+                          </button>
+                      </a>
+                  {% else %}
+                      <button class="btn btn-danger mb-0 disabled" disabled>
+                        Unavailable
                       </button>
-                  </a>
+                  {% endif %}
               </td>
             </tr>
         {% endfor %}

@@ -3,14 +3,15 @@ from django.contrib.auth.forms import UserCreationForm, AuthenticationForm, Pass
     PasswordResetForm, SetPasswordForm
 from django.contrib.auth.models import User
 from django.utils.translation import gettext_lazy as _
+
 from django.forms import ModelForm
-from .models import Reservation, GroupBook
+from .models import Reservation, GroupBook, Contact
 
 
 class BookingForm(ModelForm):
     class Meta:
         model = Reservation
-        fields = '__all__'
+        fields = ['full_name', 'entry_date', 'package', 'number_of_people']
 
 
 class RegistrationForm(UserCreationForm):
@@ -72,4 +73,15 @@ class GroupPassForm(forms.ModelForm):
             'sub_pass_type': forms.Select(attrs={'onChange': "total_package_cost()"}),
             'number_of_pass': forms.NumberInput(attrs={'disabled': 'disabled'}),
             'total_cost': forms.TextInput(attrs={'disabled': 'disabled'}),
+
+
+class ContactForm(forms.ModelForm):
+    class Meta:
+        model = Contact
+        fields = ['full_name', 'email', 'message']
+        widgets = {
+            'full_name': forms.TextInput(attrs={'class': 'form-control', 'placeholder': 'Full Name'}),
+            'email': forms.EmailInput(attrs={'class': 'form-control', 'placeholder': 'Email'}),
+            'message': forms.Textarea(attrs={'class': 'form-control', 'placeholder': 'How can we help you?'}),
+
         }

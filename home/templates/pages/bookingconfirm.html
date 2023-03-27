@@ -1,7 +1,6 @@
 {% extends 'pages/base_background.html' %}
 
-{% block title %} Material Kit 2 by Creative Tim {% endblock title %}
-{% block body %} class="sign-in-basic" {% endblock body %}
+{% block title %} Booking confirmed {% endblock title %}
 
 {% block header %}
 
@@ -18,22 +17,28 @@
           <div class="card z-index-0 fadeIn3 fadeInBottom">
             <div class="card-header p-0 position-relative mt-n4 mx-3 z-index-2">
               <div class="bg-gradient-primary shadow-primary border-radius-lg py-3 pe-1">
-                <h4 class="text-white font-weight-bolder text-center mt-2 mb-0">Password Reset Complete</h4>
+                <h4 class="text-white font-weight-bolder text-center mt-2 mb-0">Booking Confirmed</h4>
               </div>
             </div>
             <div class="card-body">
-              Your password has been changed successfully and you can login again.
-              <a href="{% url 'login' %}">Login</a>
+              Thank you! Your booking is confirmed and your total payment sum is {{ price }} $CAD and booking id is {{ booking_id }}. You can pay at the counter.
             </div>
+            <div class="align-self-center my-4">
+              <a href="/">
+                      <button class="btn btn-success mb-0">
+                        Return Home
+                      </button>
+               </a>
           </div>
         </div>
       </div>
     </div>
+
   </div>
   {% endblock content %}
 
   {% block footer %}
 
 {#  {% include 'includes/footer_signin.html' %}#}
-  
+
   {% endblock footer %}
