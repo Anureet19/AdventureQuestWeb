@@ -198,4 +198,8 @@ class LocationView(TemplateView):
 api_key = settings.GOOGLE_MAPS_API_KEY
 url = f"https://maps.googleapis.com/maps/api/js?key={api_key}"
 
+def about(request):
+    rides = Ride.objects.all()
+    return render(request, 'pages/about.html', {'rides': rides})
+
 
