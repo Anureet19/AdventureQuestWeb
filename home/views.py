@@ -6,7 +6,7 @@ import datetime
 from django.views import View
 
 from .forms import BookingForm
-from .models import Tier, Reservation, Package, Contact, Directions
+from .models import Tier, Reservation, Package, Contact, Directions, Ride
 from theme_material_kit.forms import LoginForm, RegistrationForm, UserPasswordResetForm, UserSetPasswordForm, \
     UserPasswordChangeForm
 from django.contrib.auth import logout

@@ -1,14 +1,9 @@
-
-
-{% extends 'layouts/base_background.html' %}
+{% extends 'pages/base_background.html' %}
 {% load static %}
 
-{% block title %} Material Kit 2 by Creative Tim {% endblock title %}
-{% block body %} class="about-us bg-gray-200" {% endblock body %}
+{% block title %} About us {% endblock title %}
 
 {% block header %}
-
-{% include 'includes/navigation_transparent.html' %}
 
 {% endblock header %}
 
@@ -16,12 +11,51 @@
 
   <!-- -------- START HEADER 7 w/ text and video ------- -->
   <header class="bg-gradient-dark">
+    <nav class="navbar navbar-expand-lg navbar-dark navbar-absolute bg-transparent shadow-none">
+    <div class="container">
+      <a class="navbar-brand text-white" href="javascript:;">WinPark Adventures</a>
+
+      <div class="collapse navbar-collapse" id="navbar-header-2">
+        <ul class="navbar-nav mx-auto">
+          <li class="nav-item">
+            <a class="nav-link text-white" href="/">
+              Home
+            </a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link text-white" href="/about">
+              Ride Information
+            </a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link text-white" href="/contact-us">
+              Contact Us
+            </a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link text-white" href="/location">
+              Location
+            </a>
+          </li>
+        </ul>
+
+        <ul class="nav navbar-nav" >
+            <li>
+              <h6 class="nav-link text-white my-3">Welcome, User</h6>
+           </li>
+          <li>
+              <a href="/logout"><button type="button" class="form-control mr-sm-1 btn btn-primary my-3">Logout</button></a>
+          </li>
+        </ul>
+      </div>
+    </div>
+  </nav>
     <div class="page-header min-vh-75" style="background-image: url('{% static 'img/bg9.jpg' %}');">
       <span class="mask bg-gradient-dark opacity-6"></span>
       <div class="container">
         <div class="row justify-content-center">
           <div class="col-lg-8 text-center mx-auto my-auto">
-            <h1 class="text-white">Adventure Quest</h1>
+            <h1 class="text-white mt-4">Adventure Quest</h1>
             <p class="lead mb-4 text-white opacity-8">At Adventure Quest, we offer a wide range of activities and attractions that cater to children of all ages. From thrilling rides and interactive games to educational exhibits and live shows, there's something for everyone here. We also have plenty of options for food and drink, so you can refuel and recharge between adventures. We know that parents want peace of mind when it comes to the safety of their children, which is why we take great care to ensure that our park is secure and well-maintained. </p>
           </div>
         </div>
