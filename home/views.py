@@ -157,7 +157,7 @@ def offers(request):
         if form.is_valid():
             print(1)
             group_pass = form.save(commit=False)
-
+            group_pass.save()
             return HttpResponse("Response Saved!")
 
         else:

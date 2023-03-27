@@ -69,10 +69,16 @@ class GroupPassForm(forms.ModelForm):
         model = GroupBook
         fields = ['members', 'pass_type', 'sub_pass_type', 'number_of_pass', 'total_cost', 'date']
         widgets = {
-            'pass_type': forms.RadioSelect(),
-            'sub_pass_type': forms.Select(attrs={'onChange': "total_package_cost()"}),
-            'number_of_pass': forms.NumberInput(attrs={'disabled': 'disabled'}),
-            'total_cost': forms.TextInput(attrs={'disabled': 'disabled'}),
+            'pass_type': forms.RadioSelect(attrs={'class': 'my-field-radio'}),
+            'sub_pass_type': forms.Select(attrs={'class': 'my-field-class'}),
+            'members': forms.TextInput(attrs={'class': 'my-field-class'}),
+            'number_of_pass': forms.TextInput(attrs={'readonly': 'readonly', 'class': 'my-field-class'}),
+            'total_cost': forms.TextInput(attrs={'readonly': 'readonly', 'class': 'my-field-class'}),
+        }
+
+    class Media:
+        css = {
+            'all': ('home/static/deals.css',)
         }
 
 
@@ -84,5 +90,4 @@ class ContactForm(forms.ModelForm):
             'full_name': forms.TextInput(attrs={'class': 'form-control', 'placeholder': 'Full Name'}),
             'email': forms.EmailInput(attrs={'class': 'form-control', 'placeholder': 'Email'}),
             'message': forms.Textarea(attrs={'class': 'form-control', 'placeholder': 'How can we help you?'}),
-
         }

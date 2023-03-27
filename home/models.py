@@ -64,10 +64,17 @@ class GroupBook(models.Model):
     )
     members = models.IntegerField(null=False, default=1)
     total_cost = models.DecimalField(max_digits=10, decimal_places=2, default=0)
-    pass_type = models.IntegerField(null=False, max_length=1, choices=GROUP_PASS_CHOICES, default=0)
-    sub_pass_type = models.IntegerField(null=False, max_length=1, choices=SUB_PASS_CHOICES, default=0)
-    number_of_pass = models.IntegerField(null=False, default=1)
+    pass_type = models.IntegerField(max_length=1, choices=GROUP_PASS_CHOICES, default=0)
+    sub_pass_type = models.IntegerField(max_length=1, choices=SUB_PASS_CHOICES, default=0)
+    number_of_pass = models.IntegerField(default=1)
     date = models.DateField(default=timezone.now)
+
+    class Meta:
+        verbose_name = "Group Pass"
+        verbose_name_plural = "Group Passes"
+
+    def __str__(self):
+        return f"Booked {dict(self.GROUP_PASS_CHOICES).get(self.pass_type, '')} - {dict(self.SUB_PASS_CHOICES).get(self.sub_pass_type, '')} with {self.members} members"
 
 
 class Contact(models.Model):
