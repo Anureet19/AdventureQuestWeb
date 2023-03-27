@@ -23,13 +23,12 @@ class RegistrationForm(UserCreationForm):
         super().__init__(*args, **kwargs)
 
         for field in self.fields:
-            self.fields[field].widget.attrs.update({
-                'class': 'form-control',
-            })
+            self.fields[field].widget.attrs.update({'class': 'form-control',})
 
 
 class LoginForm(AuthenticationForm):
     username = UsernameField(widget=forms.TextInput(attrs={"class": "form-control"}))
+
     password = forms.CharField(
         label=_("Password"),
         strip=False,
