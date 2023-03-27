@@ -13,9 +13,7 @@
   <nav class="navbar navbar-expand-lg navbar-dark navbar-absolute bg-transparent shadow-none">
     <div class="container">
       <a class="navbar-brand text-white" href="javascript:;">WinPark Adventures</a>
-      <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbar-header-2" aria-controls="navbar-header-2" aria-expanded="false" aria-label="Toggle navigation">
-        <span class="navbar-toggler-icon"></span>
-      </button>
+
       <div class="collapse navbar-collapse" id="navbar-header-2">
         <ul class="navbar-nav mx-auto">
           <li class="nav-item">
@@ -35,27 +33,14 @@
           </li>
         </ul>
 
-        <ul class="nav navbar-nav">
-          <li class="nav-item">
-            <a class="nav-link text-white" href="https://twitter.com/CreativeTim">
-              <i class="fab fa-twitter"></i>
-            </a>
-          </li>
-          <li class="nav-item">
-            <a class="nav-link text-white mx-2" href="https://www.facebook.com/CreativeTim">
-              <i class="fab fa-facebook"></i>
-            </a>
-          </li>
-          <li class="nav-item">
-            <a class="nav-link text-white" href="https://www.instagram.com/CreativeTimOfficial">
-              <i class="fab fa-instagram"></i>
-            </a>
-          </li>
+        <ul class="nav navbar-nav" >
+            <li>
+              <h6 class="nav-link text-white my-3">Welcome, User</h6>
+           </li>
           <li>
-              <h6 class="nav-link text-white">Welcome, User</h6>
-          </li>
-          <li>
-              <a href="/logout"><button type="button" class="btn btn-white mx-4">Logout</button></a>
+
+              <a href="/login"><button type="button" class="form-control mr-sm-1 btn btn-primary my-3">Logout</button></a>
+
           </li>
         </ul>
       </div>
@@ -99,15 +84,15 @@
             <div class="p-3 text-center">
               <h1 class="text-gradient text-primary"><span id="state1" countTo="30">0</span>+</h1>
               <h5 class="mt-3">Exciting Rides</h5>
-              <p class="text-sm font-weight-normal">Get ready for the thrill of a lifetime at our exciting amusement park!</p>
+              <p class="text-sm font-weight-normal">Prepare yourself for an unforgettable experience at our thrilling amusement park!</p>
             </div>
             <hr class="vertical dark">
           </div>
           <div class="col-md-4 position-relative">
             <div class="p-3 text-center">
               <h1 class="text-gradient text-primary"> <span id="state2" countTo="5">0</span></h1>
-              <h5 class="mt-3">Thrilling Rollercoasters</h5>
-              <p class="text-sm font-weight-normal">Heart-pumping twists and turns on our crazy coasters.</p>
+              <h5 class="mt-3">Appealing Surroundings</h5>
+              <p class="text-sm font-weight-normal">Enjoy the beauty of nature by taking a stroll through our lovely gardens!</p>
             </div>
             <hr class="vertical dark">
           </div>
@@ -135,14 +120,14 @@
               <div class="card-body py-7 text-center">
                 <i class="material-icons text-white text-4xl my-3">touch_app</i>
                 <h3 class="text-white">Gold Pass</h3>
-                <p class="text-white opacity-8">With our Gold Access Pass, you'll have access to all of our amazing rides and attractions, without any restrictions! Skip the lines and enjoy unlimited fun all day long. Plus, you'll get exclusive discounts on food and merchandise, making your day at the park even more enjoyable!</p>
+                <p class="text-white opacity-8">By purchasing our Gold Access Pass, you'll receive unlimited access to all of our wonderful rides and attractions, enabling you to have endless fun all day long without having to stand in line. Your entire enjoyment of the park will be increased by the great discounts you'll get on food and merchandise!</p>
               </div>
             </div>
             <div class="back back-background" style="background-image: url(https://images.unsplash.com/photo-1498889444388-e67ea62c464b?ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&ixlib=rb-1.2.1&auto=format&fit=crop&w=1365&q=80); background-size: cover;">
               <div class="card-body pt-7 text-center">
-                <h3 class="text-white">Discover More</h3>
-                <p class="text-white opacity-8"> You will save a lot of time going from prototyping to full-functional code because all elements are implemented.</p>
-                <a href="{% url 'page_header' %}" target="_blank" class="btn btn-white btn-sm w-50 mx-auto mt-3">Start with Headers</a>
+                <h3 class="text-white">Would like to Learn More!</h3>
+                <p class="text-white opacity-8"> Prepare to shout with ecstasy! Reserve your tickets to our theme park right away to be ready for an exciting and humorous day.</p>
+
               </div>
             </div>
           </div>
@@ -155,14 +140,14 @@
               <div class="card-body py-7 text-center">
                 <i class="material-icons text-white text-4xl my-3">touch_app</i>
                 <h3 class="text-white">Blue Pass</h3>
-                <p class="text-white opacity-8">Our Blue Access Pass gives you access to all of our rides and attractions, just like our Gold Pass. The only difference is that you'll have to wait in line like everyone else. But don't worry, our lines move quickly and you'll still have plenty of time to enjoy everything the park has to offer!</p>
+                <p class="text-white opacity-8">You will get access to all of our rides and attractions with our Blue Access Pass, exactly as our Gold Pass. The primary distinction is the requirement that you stand in line with other guests. Although our lines move rapidly, you can be sure that you'll still have plenty of time to enjoy all the thrilling attractions the park has to offer.</p>
               </div>
             </div>
             <div class="back back-background" style="background-image: url(https://images.unsplash.com/photo-1498889444388-e67ea62c464b?ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&ixlib=rb-1.2.1&auto=format&fit=crop&w=1365&q=80); background-size: cover;">
               <div class="card-body pt-7 text-center">
-                <h3 class="text-white">Discover More</h3>
-                <p class="text-white opacity-8"> You will save a lot of time going from prototyping to full-functional code because all elements are implemented.</p>
-                <a href="{% url 'page_header' %}" target="_blank" class="btn btn-white btn-sm w-50 mx-auto mt-3">Start with Headers</a>
+                <h3 class="text-white">Would like to Learn More!</h3>
+                <p class="text-white opacity-8"> Prepare to shout with ecstasy! Reserve your tickets to our theme park right away to be ready for an exciting and humorous day.</p>
+
               </div>
             </div>
           </div>
@@ -175,14 +160,14 @@
               <div class="card-body py-7 text-center">
                 <i class="material-icons text-white text-4xl my-3">touch_app</i>
                 <h3 class="text-white">Silver Pass</h3>
-                <p class="text-white opacity-8">If you're on a budget, our Silver Access Pass is a great option! You'll have access to all of our rides and attractions, but with some restrictions. You may need to wait in longer lines and some rides may have limited availability. But don't let that stop you from having a great time - our Silver Pass is still packed with plenty of fun and excitement!</p>
+                <p class="text-white opacity-8">Silver Access Pass is a great option for travellers on a tight budget! You will still have access to all of our rides and attractions despite some limitations, such as increased wait times and restricted availability for select rides, assuring a fun and exciting day at the park!</p>
               </div>
             </div>
             <div class="back back-background" style="background-image: url(https://images.unsplash.com/photo-1498889444388-e67ea62c464b?ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&ixlib=rb-1.2.1&auto=format&fit=crop&w=1365&q=80); background-size: cover;">
               <div class="card-body pt-7 text-center">
-                <h3 class="text-white">Discover More</h3>
-                <p class="text-white opacity-8"> You will save a lot of time going from prototyping to full-functional code because all elements are implemented.</p>
-                <a href="{% url 'page_header' %}" target="_blank" class="btn btn-white btn-sm w-50 mx-auto mt-3">Start with Headers</a>
+                <h3 class="text-white">Would like to Learn More!</h3>
+                <p class="text-white opacity-8"> Prepare to shout with ecstasy! Reserve your tickets to our theme park right away to be ready for an exciting and humorous day.</p>
+
               </div>
             </div>
           </div>
@@ -280,7 +265,10 @@
   </div>
 </div>
 {% endif %}
-<!-- -------   START PRE-FOOTER 2 - simple social line w/ title & 3 buttons    -------- -->
+
+
+<!-- -------   START PRE-FOOTER 2 -------- -->
+
 <div class="py-5">
   <div class="container">
     <div class="row">
@@ -288,23 +276,14 @@
           {#    <a class="text-center shadow-blur font-weight-bold text-black" >Get Your Pass Now!</a>#}
         <h4 class="mb-">Thank you for your support!</h4>
         <p class="lead mb-1">Our adventures are top-notch.</p>
-
       </div>
       <div class="col-lg-5 me-lg-auto my-lg-auto text-lg-end mt-5">
-        <a href="https://twitter.com/intent/tweet?text=Check%20Material%20UI%20Kit%20made%20by%20%40CreativeTim%20%23webdesign%20%23designsystem%20%23bootstrap5&url=https%3A%2F%2Fwww.creative-tim.com%2Fproduct%2Fmaterial-kit" class="btn btn-twitter mb-0 me-2" target="_blank">
-          <i class="fab fa-twitter me-1"></i> Tweet
-        </a>
-        <a href="https://www.facebook.com/sharer/sharer.php?u=https://appseed.us/product/material-kit/django/" class="btn btn-facebook mb-0 me-2" target="_blank">
-          <i class="fab fa-facebook-square me-1"></i> Share
-        </a>
-        <a href="https://www.pinterest.com/pin/create/button/?url=https://appseed.us/product/material-kit/django/" class="btn btn-pinterest mb-0 me-2" target="_blank">
-          <i class="fab fa-pinterest me-1"></i> Pin it
-        </a>
+
       </div>
     </div>
   </div>
 </div>
-<!-- -------   END PRE-FOOTER 2 - simple social line w/ title & 3 buttons    -------- -->
+<!-- -------   END PRE-FOOTER 2 --------- -->
 </div>
 
 

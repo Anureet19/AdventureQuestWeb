@@ -87,7 +87,6 @@ TEMPLATES = [
 
 WSGI_APPLICATION = "core.wsgi.application"
 
-
 # Database
 # https://docs.djangoproject.com/en/4.1/ref/settings/#databases
 
@@ -164,3 +163,25 @@ DEFAULT_AUTO_FIELD = "django.db.models.BigAutoField"
 
 LOGIN_REDIRECT_URL = '/'
 EMAIL_BACKEND = 'django.core.mail.backends.console.EmailBackend'
+
+#Email Functionality
+# EMAIL_BACKEND = 'django.core.mail.backends.smtp.EmailBackend'
+EMAIL_HOST = 'smtp.gmail.com'
+EMAIL_PORT = 587
+EMAIL_USE_TLS = True
+EMAIL_HOST_USER = ''
+EMAIL_HOST_PASSWORD = ''
+
+EMAIL = {
+    'default': {
+        'BACKEND': EMAIL_BACKEND,
+        'HOST': EMAIL_HOST,
+        'PORT': EMAIL_PORT,
+        'USE_TLS': EMAIL_USE_TLS,
+        'HOST_USER': EMAIL_HOST_USER,
+        'HOST_PASSWORD': EMAIL_HOST_PASSWORD,
+    }
+}
+
+#API Keys for Maps
+GOOGLE_MAPS_API_KEY = 'AIzaSyCPYQEoLkfGvwhmEg5gekIh-2ILQTAkJzo'
