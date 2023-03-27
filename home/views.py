@@ -2,10 +2,11 @@ from django.contrib.auth.decorators import login_required
 from django.contrib.auth.models import User
 from django.shortcuts import render, redirect
 from django.http import HttpResponse
+
 import datetime
 from django.views import View
 
-from .forms import BookingForm
+from .forms import BookingForm, GroupPassForm
 from .models import Tier, Reservation, Package, Contact, Directions, Ride
 from theme_material_kit.forms import LoginForm, RegistrationForm, UserPasswordResetForm, UserSetPasswordForm, \
     UserPasswordChangeForm
@@ -149,6 +150,22 @@ url = f"https://maps.googleapis.com/maps/api/js?key={api_key}"
 
 
 # Create your views here.
+def offers(request):
+    offers_form = GroupPassForm()
+    if request.method == 'POST':
+        form = GroupPassForm(request.POST)
+        if form.is_valid():
+            print(1)
+            group_pass = form.save(commit=False)
+
+            return HttpResponse("Response Saved!")
+
+        else:
+            return HttpResponse("ERRORS" + str(form.errors))
+            # print(form.errors)
+    else:
+        return render(request, 'pages/deals.html', {'form': offers_form})
+
 def bookingview(request):
     if request.method == 'POST':
         try:

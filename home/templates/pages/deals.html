@@ -1,0 +1,122 @@
+{% extends 'pages/base_background.html' %}
+{% load static %}
+
+{% block title %} WinPark Deals {% endblock title %}
+
+{% block body %} class="deals bg-gray-200" {% endblock body %}
+
+{% block content %}
+    <section>
+    <div class="page-header min-vh-100">
+      <div class="container">
+        <div class="row">
+          <div class="col-6 d-lg-flex d-none h-100 my-auto pe-0 position-absolute top-0 start-0 text-center justify-content-center flex-column">
+            <div class="position-relative h-100 m-3 px-7 border-radius-lg d-flex flex-column justify-content-center" style="background-image: url('{% static 'img/illustrations/illustration-signin.jpg' %}'); background-size: cover;" loading="lazy"></div>
+          </div>
+          <div class="col-xl-5 col-lg-6 col-md-7 d-flex flex-column ms-auto me-auto ms-lg-auto me-lg-5">
+            <div class="card d-flex blur justify-content-center shadow-lg my-sm-0 my-sm-6 mt-8 mb-5">
+              <div class="card-header p-0 position-relative mt-n4 mx-3 z-index-2 bg-transparent">
+                <div class="bg-gradient-primary shadow-primary border-radius-lg p-3">
+                  <h4 class="text-white text-primary mb-0">Welcome to Adventure Quest Offers</h4>
+                </div>
+              </div>
+              <div class="card-body">
+                <p class="pb-3">
+                  Explore our offers on passes
+                </p>
+                   <form action="{% url 'offers' %}" method="post">
+                        {% csrf_token %}
+                        {{ form.as_div }}
+                        <input type="submit" value="Submit" class="btn bg-gradient-primary mt-3 mb-0">
+                    </form>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+{#<html lang="en">#}
+{##}
+{#<head>#}
+{#    <meta charset="UTF-8">#}
+{#</head>#}
+{##}
+{#<body>#}
+{##}
+{#<p> Welcome to Adventure Quest Offers</p>#}
+{# <form action="{% url 'offers' %}" method="post">#}
+{#    {% csrf_token %}#}
+{#    {{ form.as_p }}#}
+{#    <input type="submit" value="Submit" />#}
+{#    </form>#}
+{##}
+{#<script type="text/javascript">#}
+{#        window.onload = function() {#}
+{#            let cost;#}
+{#            if (document.getElementById("id_sub_pass_type").value == 0) {#}
+{#                cost = 10#}
+{#            } else if (document.getElementById("id_sub_pass_type").value == 1) {#}
+{#                cost = 15#}
+{#            } else {#}
+{#                cost = 20#}
+{#            }#}
+{#            document.getElementById("id_total_cost").value = document.getElementById("id_members").value * cost#}
+{#            document.getElementById("id_sub_pass_type").onchange = total_package_cost;#}
+{#            document.getElementById("id_members").onchange = total_package_cost;#}
+{##}
+{##}
+{#            const passTypeRadios = document.querySelectorAll('input[name="pass_type"]');#}
+{##}
+{#            // Add event listeners to each radio button#}
+{#            for (let i = 0; i < passTypeRadios.length; i++) {#}
+{#                passTypeRadios[i].addEventListener('change', function () {#}
+{#                    // Call your function on change#}
+{#                    coupleCheck();#}
+{#                });#}
+{#            }#}
+{##}
+{#            function coupleCheck() {#}
+{#                if (document.getElementById("id_pass_type_2").checked) {#}
+{#                    document.getElementById("id_members").value = 2#}
+{#                } else {#}
+{#                    document.getElementById("id_members").value = 1#}
+{#                }#}
+{##}
+{#            }#}
+{##}
+{#            function total_package_cost() {#}
+{#                if (document.getElementById("id_sub_pass_type").value == 0) {#}
+{#                    cost = 10#}
+{#                } else if (document.getElementById("id_sub_pass_type").value == 1) {#}
+{#                    cost = 15#}
+{#                } else {#}
+{#                    cost = 20#}
+{#                }#}
+{#                if (document.getElementById("id_pass_type_0").checked || document.getElementById("id_pass_type_1").checked) {#}
+{##}
+{#                    document.getElementById("id_total_cost").value = document.getElementById("id_members").value * cost#}
+{#                } else {#}
+{#                    document.getElementById("id_total_cost").value = cost * 2#}
+{#                }#}
+{##}
+{#                total_number_of_passes();#}
+{#            }#}
+{##}
+{#            function total_number_of_passes() {#}
+{#                if (document.getElementById("id_pass_type_0").checked || document.getElementById("id_pass_type_1").checked) {#}
+{#                    if (document.getElementById("id_members").value > 10) {#}
+{#                        document.getElementById("id_number_of_pass").value = Math.ceil(document.getElementById("id_members").value / 10)#}
+{#                    }#}
+{#                } else {#}
+{#                    document.getElementById("id_number_of_pass").value = Math.ceil(document.getElementById("id_members").value / 2)#}
+{#                }#}
+{#            }#}
+{#        }#}
+{#    </script>#}
+{#</body>#}
+{##}
+{#</html>#}
+
+{% endblock content %}

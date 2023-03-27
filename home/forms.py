@@ -5,7 +5,7 @@ from django.contrib.auth.models import User
 from django.utils.translation import gettext_lazy as _
 
 from django.forms import ModelForm
-from .models import Reservation, Contact
+from .models import Reservation, GroupBook, Contact
 
 
 class BookingForm(ModelForm):
@@ -63,15 +63,16 @@ class UserPasswordChangeForm(PasswordChangeForm):
         'class': 'form-control'
     }), label="Confirm New Password")
 
-# class ContactForm(forms.Form):
-#     name = forms.CharField(max_length=100)
-#     email = forms.EmailField()
-#     message = forms.CharField(widget=forms.Textarea)
 
-# class ContactForm(forms.Form):
-#     name = forms.CharField(max_length=100, required=True, widget=forms.TextInput(attrs={'class': 'form-control', 'placeholder': 'Full Name'}))
-#     email = forms.EmailField(required=True, widget=forms.EmailInput(attrs={'class': 'form-control', 'placeholder': 'xyz@gmail.com'}))
-#     message = forms.CharField(required=True, widget=forms.Textarea(attrs={'class': 'form-control', 'rows': 6, 'placeholder': 'Describe your problem in at least 250 characters'}))
+class GroupPassForm(forms.ModelForm):
+    class Meta:
+        model = GroupBook
+        fields = ['members', 'pass_type', 'sub_pass_type', 'number_of_pass', 'total_cost', 'date']
+        widgets = {
+            'pass_type': forms.RadioSelect(),
+            'sub_pass_type': forms.Select(attrs={'onChange': "total_package_cost()"}),
+            'number_of_pass': forms.NumberInput(attrs={'disabled': 'disabled'}),
+            'total_cost': forms.TextInput(attrs={'disabled': 'disabled'}),
 
 
 class ContactForm(forms.ModelForm):
@@ -82,4 +83,5 @@ class ContactForm(forms.ModelForm):
             'full_name': forms.TextInput(attrs={'class': 'form-control', 'placeholder': 'Full Name'}),
             'email': forms.EmailInput(attrs={'class': 'form-control', 'placeholder': 'Email'}),
             'message': forms.Textarea(attrs={'class': 'form-control', 'placeholder': 'How can we help you?'}),
+
         }
