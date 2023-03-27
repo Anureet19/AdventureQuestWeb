@@ -77,9 +77,17 @@ class UserPasswordChangeForm(PasswordChangeForm):
 class GroupPassForm(forms.ModelForm):
     class Meta:
         model = GroupBook
-        fields = ['members', 'pass_type', 'sub_pass_type', 'number_of_pass', 'total_cost', 'date']
+        fields = ['pass_type','sub_pass_type', 'members', 'number_of_pass', 'total_cost', 'date']
+        labels = {
+            'members': 'Members',
+            'pass_type': 'Group Pass Type',
+            'sub_pass_type': 'Sub Pass Type',
+            'number_of_pass': 'Number of Passes',
+            'total_cost': 'Total Cost (CAD)',
+            'date': 'Date'
+        }
         widgets = {
-            'pass_type': forms.RadioSelect(attrs={'class': 'my-field-radio'}),
+            'pass_type': forms.RadioSelect(),
             'sub_pass_type': forms.Select(attrs={'class': 'my-field-class'}),
             'members': forms.TextInput(attrs={'class': 'my-field-class'}),
             'number_of_pass': forms.TextInput(attrs={'readonly': 'readonly', 'class': 'my-field-class'}),

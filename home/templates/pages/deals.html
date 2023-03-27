@@ -7,11 +7,25 @@
 
 {% block content %}
     <section>
-    <div class="page-header min-vh-100">
-      <div class="container">
+    <div class="page-header min-vh-100" id="deals_header">
+      <div class="container" >
         <div class="row">
           <div class="col-6 d-lg-flex d-none h-100 my-auto pe-0 position-absolute top-0 start-0 text-center justify-content-center flex-column">
-            <div class="position-relative h-100 m-3 px-7 border-radius-lg d-flex flex-column justify-content-center" style="background-image: url('{% static 'img/illustrations/illustration-signin.jpg' %}'); background-size: cover;" loading="lazy"></div>
+             <div class="scrollable-div overflow-auto" style="color: white;">
+
+                 <div  style="background-color: white; color: black; font-size: medium; opacity: 80%; text-align: justify; padding: 10px; font-weight: bold">
+                     <h3>Adventure Quest - Group Pass</h3>
+                      <ul style="list-style-type: none; font-size: medium">
+                     <li style="font-weight: bold;">Family Pass <p style="font-weight: lighter">A family pass can be a fantastic way to enjoy a day of fun and excitement for a large group at a discounted price. With a family pass, up to 10 individuals can gain entry to the park using a single pass, which can be a great cost-saving option compared to purchasing individual tickets.
+For enhanced experience, you can choose sub passes for family pass holders, which can further enhance the experience. These sub passes typically come in different tiers, such as gold, silver, and blue, and can provide access to additional rides, attractions, and amenities.</p></li>
+                     <li>Student Pass <p style="font-weight: lighter">A student pass is a great way for students to save money while still enjoying all the fun and excitement an adventure park has to offer. With a student pass, students can get access to all the park's attractions at a reduced price.
+
+The student pass comes with various sub pass options such as gold, silver, and blue, giving students the flexibility to choose a pass that best suits their needs and budget. Each sub pass offers different levels of access to the park's attractions, giving students the freedom to customize their experience.</p></li>
+                     <li>Couple Pass <p style="font-weight: lighter">The couple pass is the perfect way for two people to enjoy the adventure park together while saving money. With the couple pass, both individuals can enjoy the park's attractions and activities at a discounted rate. This pass is ideal for couples who want to spend some quality time together while exploring the park.
+With the couple pass, you and your partner can create unforgettable memories and have an amazing adventure together. Plus, with the money you save, you can even treat yourselves to some delicious food or souvenirs from the park. So why wait? Get your couple pass today and start your adventure!</p></li>
+                 </ul>
+                 </div>
+             </div>
           </div>
           <div class="col-xl-5 col-lg-6 col-md-7 d-flex flex-column ms-auto me-auto ms-lg-auto me-lg-5">
             <div class="card d-flex blur justify-content-center shadow-lg my-sm-0 my-sm-6 mt-8 mb-5">
@@ -27,8 +41,13 @@
                    <form action="{% url 'offers' %}" method="post">
                         {% csrf_token %}
                         {{ form.as_p }}
-                        <input type="submit" value="Submit" class="btn bg-gradient-primary mt-3 mb-0">
+                       <div style="text-align: center">
+                           <input type="submit" value="Book Now!" class="btn bg-gradient-primary mt-3 mb-0" style="alignment: center">
+                       </div>
                     </form>
+                  <div style="text-align: center">
+                      <input type="submit" value="Back to Home" class="btn bg-gradient-primary mt-3 mb-0" style="alignment: right">
+                  </div>
               </div>
             </div>
           </div>
@@ -74,11 +93,11 @@
             function total_package_cost() {
                 total_number_of_passes();
                 if (document.getElementById("id_sub_pass_type").value == 0) {
-                    cost = 10
+                    cost = 9.99
                 } else if (document.getElementById("id_sub_pass_type").value == 1) {
-                    cost = 15
+                    cost = 14.99
                 } else {
-                    cost = 20
+                    cost = 19.99
                 }
                 if (document.getElementById("id_pass_type_0").checked || document.getElementById("id_pass_type_1").checked) {
 

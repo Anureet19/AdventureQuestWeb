@@ -150,6 +150,7 @@ url = f"https://maps.googleapis.com/maps/api/js?key={api_key}"
 
 
 # Create your views here.
+@login_required(login_url='/login/')
 def offers(request):
     offers_form = GroupPassForm()
     if request.method == 'POST':

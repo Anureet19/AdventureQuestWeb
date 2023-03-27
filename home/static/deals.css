@@ -9,3 +9,17 @@
 .my-field-radio{
     font-family: sans-serif;
 }
+
+
+
+#deals_header::before {
+      content: "";
+      background-image: url(https://images.unsplash.com/photo-1582198790133-3692e01f649c?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxzZWFyY2h8NXx8cm9sbGVyJTIwY29hc3RlcnxlbnwwfHwwfHw%3D&w=1000&q=80;);
+      background-size: cover;
+      position: absolute;
+      top: 0px;
+      right: 0px;
+      bottom: 0px;
+      left: 0px;
+      opacity: 90%
+}
