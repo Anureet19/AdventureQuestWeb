@@ -63,3 +63,13 @@ class Directions(models.Model):
 
     def __str__(self):
         return self.title
+    
+class Ride(models.Model):
+    name = models.CharField(max_length=200)
+    height_limit = models.PositiveIntegerField()
+    capacity = models.PositiveIntegerField()
+    is_available = models.BooleanField(default=True)
+    duration = models.DurationField()
+
+    def __str__(self):
+        return self.name

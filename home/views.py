@@ -6,7 +6,7 @@ import datetime
 from django.views import View
 
 from .forms import BookingForm
-from .models import Tier, Reservation, Package, Contact, Directions
+from .models import Tier, Reservation, Package, Contact, Directions, Ride
 from theme_material_kit.forms import LoginForm, RegistrationForm, UserPasswordResetForm, UserSetPasswordForm, \
     UserPasswordChangeForm
 from django.contrib.auth import logout
@@ -92,6 +92,7 @@ class RegistrationView(View):
         context = {'form': form}
         return render(request, self.template_name, context)
 
+
 def about(request):
     return render(request, 'pages/about.html')
 
@@ -99,16 +100,6 @@ def about(request):
 class UserPasswordResetView(auth_views.PasswordResetView):
     template_name = 'pages/password_reset.html'
     form_class = UserPasswordResetForm
-
-
-class UserPasswordResetConfirmView(auth_views.PasswordResetConfirmView):
-    template_name = 'pages/password_reset_confirm.html'
-    form_class = UserSetPasswordForm
-
-
-class UserPasswordChangeView(auth_views.PasswordChangeView):
-    template_name = 'pages/password_change.html'
-    form_class = UserPasswordChangeForm
 
 
 class ContactView(FormView):
@@ -143,6 +134,7 @@ class ContactView(FormView):
 def success(request):
     return render(request, 'pages/success.html')
 
+
 class LocationView(TemplateView):
     template_name = 'pages/location.html'
 
@@ -150,6 +142,7 @@ class LocationView(TemplateView):
         context = super().get_context_data(**kwargs)
         context['GOOGLE_MAPS_API_KEY'] = settings.GOOGLE_MAPS_API_KEY
         return context
+
 
 api_key = settings.GOOGLE_MAPS_API_KEY
 url = f"https://maps.googleapis.com/maps/api/js?key={api_key}"
@@ -180,9 +173,11 @@ def bookingview(request):
         reservation.booking_id = booking_id
 
         reservation.save()
-        return HttpResponse(render(request, 'pages/bookingconfirm.html', {'price': total_price, 'booking_id': booking_id}))
+        return HttpResponse(
+            render(request, 'pages/bookingconfirm.html', {'price': total_price, 'booking_id': booking_id}))
     else:
         return HttpResponse('Access Denied')
+
 
 class LocationView(TemplateView):
     template_name = 'pages/location.html'
@@ -195,7 +190,11 @@ class LocationView(TemplateView):
         context['directions'] = directions
         return context
 
+
 api_key = settings.GOOGLE_MAPS_API_KEY
 url = f"https://maps.googleapis.com/maps/api/js?key={api_key}"
 
 
+def about(request):
+    rides = Ride.objects.all()
+    return render(request, 'pages/about.html', {'rides': rides})
