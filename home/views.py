@@ -1,9 +1,12 @@
 from django.contrib.auth.decorators import login_required
+from django.contrib.auth.models import User
 from django.shortcuts import render, redirect
 from django.http import HttpResponse
+import datetime
+from django.views import View
 
 from .forms import BookingForm
-from .models import Tier, Reservation, Package, Contact
+from .models import Tier, Reservation, Package, Contact, Directions
 from theme_material_kit.forms import LoginForm, RegistrationForm, UserPasswordResetForm, UserSetPasswordForm, \
     UserPasswordChangeForm
 from django.contrib.auth import logout
@@ -35,7 +38,7 @@ def index(request):
 @login_required(login_url='/login/')
 def bookpackage(request):
     package_id = request.GET['package_id']
-    package = Package.objects.all().filter(id=package_id)
+    package = Package.objects.all().get(id=package_id)
     return HttpResponse(render(request, 'pages/bookpackage.html', {'package': package}))
 
 
@@ -45,13 +48,40 @@ class UserLoginView(auth_views.LoginView):
     success_url = '/'
 
 
-def user_logout_view(request):
-    logout(request)
-    return redirect('/login/')
+# def user_logout_view(request):
+#     logout(request)
+#     return redirect('/login/')
+
+class UserLogoutView(View):
+    def get(self, request, *args, **kwargs):
+        logout(request)
+        return redirect('/login/')
 
 
-def registration(request):
-    if request.method == 'POST':
+# def registration(request):
+#     if request.method == 'POST':
+#         form = RegistrationForm(request.POST)
+#         if form.is_valid():
+#             form.save()
+#             print('Account created successfully!')
+#             return redirect('/login')
+#         else:
+#             print("Registration failed!")
+#     else:
+#         form = RegistrationForm()
+#
+#     context = {'form': form}
+#     return render(request, 'pages/sign-up.html', context)
+
+class RegistrationView(View):
+    template_name = 'pages/sign-up.html'
+
+    def get(self, request, *args, **kwargs):
+        form = RegistrationForm()
+        context = {'form': form}
+        return render(request, self.template_name, context)
+
+    def post(self, request, *args, **kwargs):
         form = RegistrationForm(request.POST)
         if form.is_valid():
             form.save()
@@ -59,12 +89,8 @@ def registration(request):
             return redirect('/login')
         else:
             print("Registration failed!")
-    else:
-        form = RegistrationForm()
-
-    context = {'form': form}
-    return render(request, 'pages/sign-up.html', context)
-
+        context = {'form': form}
+        return render(request, self.template_name, context)
 
 def about(request):
     return render(request, 'pages/about.html')
@@ -130,9 +156,46 @@ url = f"https://maps.googleapis.com/maps/api/js?key={api_key}"
 
 
 # Create your views here.
-def booking_view(request):
-    form = BookingForm()
-    context = {'form': form}
-    template_name = 'bookpackage.html'
-    return render(request, template_name, context)
+def bookingview(request):
+    if request.method == 'POST':
+        print(request.POST)
+        full_name = request.POST.get('full_name', False)
+        total_person = int(request.POST.get('number_of_people', False))
+        entry = request.POST.get('entry', False)
+        package_id = request.POST.get('package_id', False)
+        current_user = request.user
+        user_object = User.objects.all().get(username=current_user)
+        package_object = Package.objects.all().get(id=package_id)
+        price_per_ticket = package_object.price
+        total_price = total_person * price_per_ticket
+        booking_id = str(package_id) + str(datetime.datetime.now())
+        reservation = Reservation()
+
+        reservation.full_name = full_name
+        reservation.number_of_people = total_person
+        reservation.entry_date = entry
+        reservation.package = package_object
+        reservation.user = user_object
+        reservation.price_paid = total_price
+        reservation.booking_id = booking_id
+
+        reservation.save()
+        return HttpResponse(render(request, 'pages/bookingconfirm.html', {'price': total_price, 'booking_id': booking_id}))
+    else:
+        return HttpResponse('Access Denied')
+
+class LocationView(TemplateView):
+    template_name = 'pages/location.html'
+
+    def get_context_data(self, **kwargs):
+        directions = Directions.objects.all()
+
+        context = super().get_context_data(**kwargs)
+        context['GOOGLE_MAPS_API_KEY'] = settings.GOOGLE_MAPS_API_KEY
+        context['directions'] = directions
+        return context
+
+api_key = settings.GOOGLE_MAPS_API_KEY
+url = f"https://maps.googleapis.com/maps/api/js?key={api_key}"
+
 

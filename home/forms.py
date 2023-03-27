@@ -11,7 +11,7 @@ from .models import Reservation, Contact
 class BookingForm(ModelForm):
     class Meta:
         model = Reservation
-        fields = '__all__'
+        fields = ['full_name', 'entry_date', 'package', 'number_of_people']
 
 
 class RegistrationForm(UserCreationForm):
