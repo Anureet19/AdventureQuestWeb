@@ -5,7 +5,7 @@ from django.contrib.auth.models import User
 from django.utils.translation import gettext_lazy as _
 
 from django.forms import ModelForm
-from .models import Reservation, Contact
+from .models import Reservation, GroupBook, Contact
 
 
 class BookingForm(ModelForm):
@@ -23,13 +23,12 @@ class RegistrationForm(UserCreationForm):
         super().__init__(*args, **kwargs)
 
         for field in self.fields:
-            self.fields[field].widget.attrs.update({
-                'class': 'form-control',
-            })
+            self.fields[field].widget.attrs.update({'class': 'form-control',})
 
 
 class LoginForm(AuthenticationForm):
     username = UsernameField(widget=forms.TextInput(attrs={"class": "form-control"}))
+
     password = forms.CharField(
         label=_("Password"),
         strip=False,
@@ -38,40 +37,67 @@ class LoginForm(AuthenticationForm):
 
 
 class UserPasswordResetForm(PasswordResetForm):
-    email = forms.EmailField(widget=forms.EmailInput(attrs={
-        'class': 'form-control'
-    }))
+    email = forms.EmailField(
+        widget=forms.EmailInput(attrs={'class': 'form-control'})
+    )
 
 
 class UserSetPasswordForm(SetPasswordForm):
-    new_password1 = forms.CharField(max_length=50, widget=forms.PasswordInput(attrs={
-        'class': 'form-control'
-    }), label="New Password")
-    new_password2 = forms.CharField(max_length=50, widget=forms.PasswordInput(attrs={
-        'class': 'form-control'
-    }), label="Confirm New Password")
+    new_password1 = forms.CharField(
+        max_length=50,
+        widget=forms.PasswordInput(attrs={'class': 'form-control'}),
+        label="New Password"
+    )
+    new_password2 = forms.CharField(
+        max_length=50,
+        widget=forms.PasswordInput(attrs={'class': 'form-control'}),
+        label="Confirm New Password"
+    )
 
 
 class UserPasswordChangeForm(PasswordChangeForm):
-    old_password = forms.CharField(max_length=50, widget=forms.PasswordInput(attrs={
-        'class': 'form-control'
-    }), label='Old Password')
-    new_password1 = forms.CharField(max_length=50, widget=forms.PasswordInput(attrs={
-        'class': 'form-control'
-    }), label="New Password")
-    new_password2 = forms.CharField(max_length=50, widget=forms.PasswordInput(attrs={
-        'class': 'form-control'
-    }), label="Confirm New Password")
+    old_password = forms.CharField(
+        max_length=50,
+        widget=forms.PasswordInput(attrs={'class': 'form-control'}),
+        label='Old Password'
+    )
 
-# class ContactForm(forms.Form):
-#     name = forms.CharField(max_length=100)
-#     email = forms.EmailField()
-#     message = forms.CharField(widget=forms.Textarea)
+    new_password1 = forms.CharField(
+        max_length=50,
+        widget=forms.PasswordInput(attrs={'class': 'form-control'}),
+        label="New Password"
+    )
 
-# class ContactForm(forms.Form):
-#     name = forms.CharField(max_length=100, required=True, widget=forms.TextInput(attrs={'class': 'form-control', 'placeholder': 'Full Name'}))
-#     email = forms.EmailField(required=True, widget=forms.EmailInput(attrs={'class': 'form-control', 'placeholder': 'xyz@gmail.com'}))
-#     message = forms.CharField(required=True, widget=forms.Textarea(attrs={'class': 'form-control', 'rows': 6, 'placeholder': 'Describe your problem in at least 250 characters'}))
+    new_password2 = forms.CharField(
+        max_length=50,
+        widget=forms.PasswordInput(attrs={'class': 'form-control'}),
+        label="Confirm New Password"
+    )
+
+class GroupPassForm(forms.ModelForm):
+    class Meta:
+        model = GroupBook
+        fields = ['pass_type','sub_pass_type', 'members', 'number_of_pass', 'total_cost', 'date']
+        labels = {
+            'members': 'Members',
+            'pass_type': 'Group Pass Type',
+            'sub_pass_type': 'Sub Pass Type',
+            'number_of_pass': 'Number of Passes',
+            'total_cost': 'Total Cost (CAD)',
+            'date': 'Date'
+        }
+        widgets = {
+            'pass_type': forms.RadioSelect(),
+            'sub_pass_type': forms.Select(attrs={'class': 'my-field-class'}),
+            'members': forms.TextInput(attrs={'class': 'my-field-class'}),
+            'number_of_pass': forms.TextInput(attrs={'readonly': 'readonly', 'class': 'my-field-class'}),
+            'total_cost': forms.TextInput(attrs={'readonly': 'readonly', 'class': 'my-field-class'}),
+        }
+
+    class Media:
+        css = {
+            'all': ('home/static/deals.css',)
+        }
 
 
 class ContactForm(forms.ModelForm):

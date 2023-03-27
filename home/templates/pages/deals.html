@@ -1,0 +1,126 @@
+{% extends 'pages/base_background.html' %}
+{% load static %}
+
+{% block title %} WinPark Deals {% endblock title %}
+
+{% block body %} class="deals bg-gray-200" {% endblock body %}
+
+{% block content %}
+    <section>
+    <div class="page-header min-vh-100" id="deals_header">
+      <div class="container" >
+        <div class="row">
+          <div class="col-6 d-lg-flex d-none h-100 my-auto pe-0 position-absolute top-0 start-0 text-center justify-content-center flex-column">
+             <div class="scrollable-div overflow-auto" style="color: white;">
+
+                 <div  style="background-color: white; color: black; font-size: medium; opacity: 80%; text-align: justify; padding: 10px; font-weight: bold">
+                     <h3>Adventure Quest - Group Pass</h3>
+                      <ul style="list-style-type: none; font-size: medium">
+                     <li style="font-weight: bold;">Family Pass <p style="font-weight: lighter">A family pass can be a fantastic way to enjoy a day of fun and excitement for a large group at a discounted price. With a family pass, up to 10 individuals can gain entry to the park using a single pass, which can be a great cost-saving option compared to purchasing individual tickets.
+For enhanced experience, you can choose sub passes for family pass holders, which can further enhance the experience. These sub passes typically come in different tiers, such as gold, silver, and blue, and can provide access to additional rides, attractions, and amenities.</p></li>
+                     <li>Student Pass <p style="font-weight: lighter">A student pass is a great way for students to save money while still enjoying all the fun and excitement an adventure park has to offer. With a student pass, students can get access to all the park's attractions at a reduced price.
+
+The student pass comes with various sub pass options such as gold, silver, and blue, giving students the flexibility to choose a pass that best suits their needs and budget. Each sub pass offers different levels of access to the park's attractions, giving students the freedom to customize their experience.</p></li>
+                     <li>Couple Pass <p style="font-weight: lighter">The couple pass is the perfect way for two people to enjoy the adventure park together while saving money. With the couple pass, both individuals can enjoy the park's attractions and activities at a discounted rate. This pass is ideal for couples who want to spend some quality time together while exploring the park.
+With the couple pass, you and your partner can create unforgettable memories and have an amazing adventure together. Plus, with the money you save, you can even treat yourselves to some delicious food or souvenirs from the park. So why wait? Get your couple pass today and start your adventure!</p></li>
+                 </ul>
+                 </div>
+             </div>
+          </div>
+          <div class="col-xl-5 col-lg-6 col-md-7 d-flex flex-column ms-auto me-auto ms-lg-auto me-lg-5">
+            <div class="card d-flex blur justify-content-center shadow-lg my-sm-0 my-sm-6 mt-8 mb-5">
+              <div class="card-header p-0 position-relative mt-n4 mx-3 z-index-2 bg-transparent">
+                <div class="bg-gradient-primary shadow-primary border-radius-lg p-3">
+                  <h4 class="text-white text-primary mb-0">Welcome to Adventure Quest Offers</h4>
+                </div>
+              </div>
+              <div class="card-body">
+                <p class="pb-3">
+                  Explore our offers on passes
+                </p>
+                   <form action="{% url 'offers' %}" method="post">
+                        {% csrf_token %}
+                        {{ form.as_p }}
+                       <div style="text-align: center">
+                           <input type="submit" value="Book Now!" class="btn bg-gradient-primary mt-3 mb-0" style="alignment: center">
+                       </div>
+                    </form>
+                  <div style="text-align: center">
+{#                      <input type="submit" value="Back to Home" class="btn bg-gradient-primary mt-3 mb-0" style="alignment: right" href="{% url home:index %}">#}
+                      <a href="/" class="btn">Back to Home</a>
+                  </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+    <script type="text/javascript">
+            let cost;
+            if (document.getElementById("id_sub_pass_type").value == 0) {
+                cost = 9.99
+            } else if (document.getElementById("id_sub_pass_type").value == 1) {
+                cost = 14.99
+            } else {
+                cost = 19.99
+            }
+            document.getElementById("id_total_cost").value = document.getElementById("id_members").value * cost
+            document.getElementById("id_sub_pass_type").onchange = total_package_cost;
+            document.getElementById("id_members").onchange = total_package_cost;
+            document.getElementById("id_pass_type").onchange = total_package_cost;
+
+
+
+            const passTypeRadios = document.querySelectorAll('input[name="pass_type"]');
+
+            // Add event listeners to each radio button
+            for (let i = 0; i < passTypeRadios.length; i++) {
+                passTypeRadios[i].addEventListener('change', function () {
+                    // Call your function on change
+                    coupleCheck();
+                });
+            }
+
+            function coupleCheck() {
+                if (document.getElementById("id_pass_type_2").checked) {
+                    document.getElementById("id_members").value = 2
+                } else {
+                    document.getElementById("id_members").value = 1
+                }
+
+            }
+
+            function total_package_cost() {
+                total_number_of_passes();
+                if (document.getElementById("id_sub_pass_type").value == 0) {
+                    cost = 9.99
+                } else if (document.getElementById("id_sub_pass_type").value == 1) {
+                    cost = 14.99
+                } else {
+                    cost = 19.99
+                }
+                if (document.getElementById("id_pass_type_0").checked || document.getElementById("id_pass_type_1").checked) {
+
+                    document.getElementById("id_total_cost").value = document.getElementById("id_members").value * cost
+                } else {
+                    document.getElementById("id_total_cost").value = cost * 2 * document.getElementById("id_number_of_pass").value
+                }
+            }
+
+            function total_number_of_passes() {
+                if (document.getElementById("id_pass_type_0").checked || document.getElementById("id_pass_type_1").checked) {
+                    if (document.getElementById("id_members").value > 10) {
+                        document.getElementById("id_number_of_pass").value = Math.ceil(document.getElementById("id_members").value / 10)
+                    }else{
+                        document.getElementById("id_number_of_pass").value = 1
+                    }
+                } else {
+                    document.getElementById("id_number_of_pass").value = Math.ceil(document.getElementById("id_members").value / 2)
+                }
+            }
+    </script>
+
+
+
+{% endblock content %}
