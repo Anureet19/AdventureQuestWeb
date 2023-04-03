@@ -1,7 +1,8 @@
 from django import forms
 from django.contrib.auth.forms import UserCreationForm, AuthenticationForm, PasswordChangeForm, UsernameField, \
     PasswordResetForm, SetPasswordForm
-from django.contrib.auth.models import User
+
+from .models import User
 from django.utils.translation import gettext_lazy as _
 
 from django.forms import ModelForm
@@ -14,6 +15,7 @@ class BookingForm(ModelForm):
         fields = '__all__'
 
 
+<<<<<<< Updated upstream
 class RegistrationForm(UserCreationForm):
     class Meta:
         model = User
@@ -26,6 +28,18 @@ class RegistrationForm(UserCreationForm):
             self.fields[field].widget.attrs.update({
                 'class': 'form-control',
             })
+=======
+# class RegistrationForm(forms.ModelForm):
+#     class Meta:
+#         model = User
+#         fields = ('username', 'email',)
+#
+#     def __init__(self, *args, **kwargs):
+#         super().__init__(*args, **kwargs)
+#
+#         for field in self.fields:
+#             self.fields[field].widget.attrs.update({'class': 'form-control',})
+>>>>>>> Stashed changes
 
 
 class LoginForm(AuthenticationForm):
@@ -92,4 +106,16 @@ class ContactForm(forms.ModelForm):
             'full_name': forms.TextInput(attrs={'class': 'form-control', 'placeholder': 'Full Name'}),
             'email': forms.EmailInput(attrs={'class': 'form-control', 'placeholder': 'Email'}),
             'message': forms.Textarea(attrs={'class': 'form-control', 'placeholder': 'How can we help you?'}),
+<<<<<<< Updated upstream
         }
+=======
+        }
+
+
+class SignUpForm(forms.ModelForm):
+    password = forms.CharField(widget=forms.PasswordInput)
+
+    class Meta:
+        model = User
+        fields = ('username', 'email', 'first_name','last_name','password')
+>>>>>>> Stashed changes

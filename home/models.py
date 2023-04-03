@@ -60,4 +60,31 @@ class Directions(models.Model):
     description = models.TextField()
 
     def __str__(self):
+<<<<<<< Updated upstream
         return self.title
+=======
+        return self.title
+
+
+class Ride(models.Model):
+    name = models.CharField(max_length=200)
+    height_limit = models.PositiveIntegerField()
+    capacity = models.PositiveIntegerField()
+    is_available = models.BooleanField(default=True)
+    duration = models.DurationField()
+
+    def __str__(self):
+        return self.name
+
+
+class Users(models.Model):
+    username = models.CharField(max_length=30, unique=True)
+    firstname = models.CharField(max_length=30)
+    lastname = models.CharField(max_length=30)
+    email = models.EmailField(unique=True)
+    pass1 = models.CharField(max_length=20)
+    pass2 = models.CharField(max_length=20)
+
+    def __str__(self):
+        return self.username
+>>>>>>> Stashed changes

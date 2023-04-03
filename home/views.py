@@ -16,6 +16,7 @@ from .forms import ContactForm
 from django.core.mail import send_mail
 from django.views.generic import TemplateView
 from django.conf import settings
+from .forms import SignUpForm
 
 
 # Create your views here.
@@ -154,11 +155,64 @@ url = f"https://maps.googleapis.com/maps/api/js?key={api_key}"
 
 
 # Create your views here.
+<<<<<<< Updated upstream
 def booking_view(request):
     form = BookingForm()
     context = {'form': form}
     template_name = 'bookpackage.html'
     return render(request, template_name, context)
+=======
+@login_required(login_url='/login/')
+def offers(request):
+    offers_form = GroupPassForm()
+    if request.method == 'POST':
+        form = GroupPassForm(request.POST)
+        if form.is_valid():
+            print(1)
+            group_pass = form.save(commit=False)
+            group_pass.save()
+            return render(request, 'pages/bookingsuccess.html')
+
+        else:
+            return HttpResponse("ERRORS" + str(form.errors))
+            # print(form.errors)
+    else:
+        return render(request, 'pages/deals.html', {'form': offers_form})
+
+
+def bookingview(request):
+    if request.method == 'POST':
+        try:
+            print(request.POST)
+            full_name = request.POST.get('full_name', False)
+            total_person = int(request.POST.get('number_of_people', False))
+            entry = request.POST.get('entry', False)
+            package_id = request.POST.get('package_id', False)
+            current_user = request.user
+            user_object = User.objects.all().get(username=current_user)
+            package_object = Package.objects.all().get(id=package_id)
+            price_per_ticket = package_object.price
+            total_price = total_person * price_per_ticket
+            booking_id = str(package_id) + str(datetime.datetime.now())
+            reservation = Reservation()
+
+            reservation.full_name = full_name
+            reservation.number_of_people = total_person
+            reservation.entry_date = entry
+            reservation.package = package_object
+            reservation.user = user_object
+            reservation.price_paid = total_price
+            reservation.booking_id = booking_id
+
+            reservation.save()
+            return HttpResponse(
+                render(request, 'pages/bookingconfirm.html', {'price': total_price, 'booking_id': booking_id}))
+        except:
+            return HttpResponse(render(request, 'pages/error.html'))
+    else:
+        return HttpResponse('Access Denied')
+
+>>>>>>> Stashed changes
 
 class LocationView(TemplateView):
     template_name = 'pages/location.html'
@@ -175,3 +229,20 @@ api_key = settings.GOOGLE_MAPS_API_KEY
 url = f"https://maps.googleapis.com/maps/api/js?key={api_key}"
 
 
+<<<<<<< Updated upstream
+=======
+def about(request):
+    rides = Ride.objects.all()
+    return render(request, 'pages/about.html', {'rides': rides})
+
+
+def signup(request):
+    if request.method == 'POST':
+        form = SignUpForm(request.POST)
+        if form.is_valid():
+            form.save()
+            return redirect('login')
+    else:
+        form = SignUpForm()
+    return render(request, 'pages/sign-up.html', {'form': form})
+>>>>>>> Stashed changes
